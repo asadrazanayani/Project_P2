@@ -28,3 +28,24 @@ Pokemon_Pals
 ## useful Info
 ### Store Image on Amazon S3
 [Upload Images on AmazonS3](https://medium.com/linkit-intecs/upload-and-view-files-in-amazon-s3-using-angular-spring-boot-325b118e7188)
+
+
+## Work Division
+1. Kyle --> Comments
+2. Ryan --> Users
+3. MD --> Upvotes
+4. Asad --> pokedex
+
+## To be decided
+Pokedex_collection
+Pokdex_wishlist
+
+## To be researched
+- Add user image to S3
+- URL mapping using parameters
+
+## Branch Naming Convension
+asad_branch
+md_branch
+ryan_branch
+kyle_branch
