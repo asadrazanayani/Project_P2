@@ -8,25 +8,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping (path = "api/v1/user")
-public class UserController {
-
-    private final UserService userService;
+@RequestMapping ("api/v1/user")
+public class PokePalController {
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    PokePalService userService;
 
-    @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public void userRegister(@RequestBody User user) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public void userRegister(@RequestBody PokePal user) {
         userService.register(user);
     }
 
-
-
-
-
-
+    @RequestMapping(value = "/login", method = RequestMethod.PUT)
+    public void userLogin(@RequestBody PokePal user) {
+        userService.login(user);
+    }
 
 }
