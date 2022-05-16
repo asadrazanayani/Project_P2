@@ -1,6 +1,7 @@
 ## User Stores and API
 |**Story**|**API**|
 |---|---|
+|A visitor can view cards of pokedex cards. However, only a user is able to add them to their collection |/api/v1/pokedex-cards|
 |New user should be able to register|/api/v1/user/register|
 |New user should be able to login|/api/v1/user/login|
 |User should be able to update their profile picture |/api/v1/user/{user_id}/update|
