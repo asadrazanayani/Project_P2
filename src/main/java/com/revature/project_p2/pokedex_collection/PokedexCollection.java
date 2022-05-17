@@ -21,5 +21,5 @@ public class PokedexCollection {
     private Timestamp updated_at;
     @OneToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private PokePal user;
+    private PokePal pokePal;
 }

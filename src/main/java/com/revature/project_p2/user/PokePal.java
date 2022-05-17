@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -18,7 +17,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data // getters, setters, toString, HashCode
-@ToString
 @Entity
 public class PokePal {
     @Id

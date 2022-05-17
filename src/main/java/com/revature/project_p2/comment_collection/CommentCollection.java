@@ -32,9 +32,4 @@ public class CommentCollection {
     @ManyToOne(targetEntity = PokedexCollection.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "collection_id", referencedColumnName = "collection_id")
     private PokedexCollection pokedexCollection;
-
-
-
-
-
 }

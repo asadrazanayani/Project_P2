@@ -21,5 +21,5 @@ public class PokedexWishlist {
     private Timestamp updated_at;
     @OneToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL) //https://stackabuse.com/a-guide-to-jpa-with-hibernate-relationship-mapping/
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private PokePal user;
+    private PokePal pokePal;
 }
