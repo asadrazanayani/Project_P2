@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface PokePalRepository extends JpaRepository<PokePal, Long> {
 
-    @Query(value = "SELECT * from user where user_email = ?1, user_password = ?2", nativeQuery = true)
+    @Query(value = "SELECT * from poke_pal where user_email = ?1, user_password = ?2", nativeQuery = true)
     public List<PokePal> findUserForLogin(String user_email, String user_password);
 
 

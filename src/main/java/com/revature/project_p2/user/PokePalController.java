@@ -15,13 +15,14 @@ public class PokePalController {
     PokePalService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void userRegister(@RequestBody PokePal user) {
+    public PokePal userRegister(@RequestBody PokePal user) {
         userService.register(user);
+        return user;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.PUT)
-    public void userLogin(@RequestBody PokePal user) {
-        userService.login(user);
+    public boolean userLogin(@RequestBody String email, @RequestBody String password) {
+        return userService.login(email, password);
     }
 
 }

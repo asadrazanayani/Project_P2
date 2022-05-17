@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PokedexCollectionController {
 
-    private final PokedexCollectionService pokedexCollectionService;
-
     @Autowired
-    public PokedexCollectionController(PokedexCollectionService pokedexCollectionService) {
-        this.pokedexCollectionService = pokedexCollectionService;
-    }
+    PokedexCollectionService pokedexCollectionService;
+
+
 
 
 }
