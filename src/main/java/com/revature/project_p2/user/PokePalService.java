@@ -23,4 +23,18 @@ public class PokePalService {
                         && users.get(0).getUser_password() == user.getUser_password());
         return is_accurate;
     }
+
+    public PokePal update_user_picture(PokePal user, Long user_id) {
+        PokePal userdb = userRepository.findById(user_id).get();
+        userdb.setUser_img_url(user.getUser_img_url());
+        userRepository.save(userdb);
+        return userdb;
+    }
+
+    public PokePal update_user_password(PokePal user, Long user_id) {
+        PokePal userdb = userRepository.findById(user_id).get();
+        userdb.setUser_password(user.getUser_password());
+        userRepository.save(userdb);
+        return userdb;
+    }
 }
