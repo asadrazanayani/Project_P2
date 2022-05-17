@@ -6,6 +6,10 @@
 |New user should be able to login|/api/v1/user/login|
 |User should be able to update their profile picture |/api/v1/user/{user_id}/update|
 |User should be able to update their profile password |/api/v1/user/{user_id}/update|
+|Users can make comments on collection or/and wishlist|api/v1/user/{user_id}/pokedex-collection/{pokedex-collection_id}/comment/create|
+|Users can make comments on collection or/and wishlist|api/v1/user/{user_id}/pokedex-wishlist/{pokedex-wishlist_id}/comment/create|
+|Users can upvode or downvote on collection or/and wishlist|api/v1/user/{user_id}/pokedex-collection/{pokedex-collection_id}/comment/create|
+|Users can make comments on collection or/and wishlist|api/v1/user/{user_id}/pokedex-wishlist/{pokedex-wishlist_id}/comment/create|
 |Create  a new pokedex collection|api/v1/user/{user_id}/pokedex-collection/create|
 |Update the pokedex collection|/api/v1/user/{user_id}/pokedex-collection/update|
 |Create  a new pokedex wishlist|/api/v1/user/{user_id}/pokedex-wishlist/create|

@@ -1,4 +1,4 @@
-package com.revature.project_p2.pokedexcollection;
+package com.revature.project_p2.pokedex_collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

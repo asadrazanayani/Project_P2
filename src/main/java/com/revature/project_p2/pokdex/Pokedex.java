@@ -1,8 +1,8 @@
 package com.revature.project_p2.pokdex;
 
 
-import com.revature.project_p2.pokedexcollection.PokedexCollection;
-import com.revature.project_p2.pokedexwishlist.PokedexWishlist;
+import com.revature.project_p2.pokedex_collection.PokedexCollection;
+import com.revature.project_p2.pokedex_wishlist.PokedexWishlist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

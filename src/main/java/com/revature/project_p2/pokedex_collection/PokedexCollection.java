@@ -1,4 +1,4 @@
-package com.revature.project_p2.pokedexwishlist;
+package com.revature.project_p2.pokedex_collection;
 
 
 import com.revature.project_p2.user.PokePal;
@@ -13,13 +13,13 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PokedexWishlist {
+public class PokedexCollection {
     @Id
     @GeneratedValue
-    private Long wishlist_id;
+    private Long collection_id;
     private Timestamp created_at;
     private Timestamp updated_at;
-    @OneToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL) //https://stackabuse.com/a-guide-to-jpa-with-hibernate-relationship-mapping/
+    @OneToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private PokePal user;
 }

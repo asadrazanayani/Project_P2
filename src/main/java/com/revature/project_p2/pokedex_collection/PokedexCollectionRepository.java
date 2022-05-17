@@ -1,4 +1,4 @@
-package com.revature.project_p2.pokedexcollection;
+package com.revature.project_p2.pokedex_collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
