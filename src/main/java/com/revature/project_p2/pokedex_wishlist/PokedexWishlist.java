@@ -22,4 +22,8 @@ public class PokedexWishlist {
     @OneToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL) //https://stackabuse.com/a-guide-to-jpa-with-hibernate-relationship-mapping/
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private PokePal pokePal;
+
+    public PokedexWishlist(PokePal pokePal) {
+        this.pokePal = pokePal;
+    }
 }

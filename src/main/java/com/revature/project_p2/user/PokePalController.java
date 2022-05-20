@@ -7,12 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping ("api/v1/user")
 public class PokePalController {
 
     @Autowired
     PokePalService userService;
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public List<PokePal> getAllUsers() {
+        return userService.getAllUsers();
+    }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public PokePal userRegister(@RequestBody PokePal user) {

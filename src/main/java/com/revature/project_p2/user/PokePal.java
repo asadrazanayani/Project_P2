@@ -36,7 +36,7 @@ public class PokePal {
     @UpdateTimestamp
     private Timestamp updated_al;
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE") // https://www.baeldung.com/jpa-default-column-values
-    private Boolean is_logged_in;
+    private Boolean is_logged_in = false;
 
     public PokePal(String user_email, String user_password) {
         this.user_email = user_email;

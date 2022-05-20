@@ -23,4 +23,12 @@ public class PokePalService {
                         && password == password);
         return is_accurate;
     }
+
+    public PokePal getPokePalByID(Long user_id) {
+        return userRepository.findById(user_id).get();
+    }
+
+    public List<PokePal> getAllUsers() {
+        return userRepository.findAll();
+    }
 }

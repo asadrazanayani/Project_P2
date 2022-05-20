@@ -22,4 +22,8 @@ public class PokedexCollection {
     @OneToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private PokePal pokePal;
+
+    public PokedexCollection(PokePal pokePal) {
+        this.pokePal = pokePal;
+    }
 }
