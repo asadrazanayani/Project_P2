@@ -18,4 +18,8 @@ public class PokedexCollectionService {
         PokedexCollection pokedexCollection = new PokedexCollection(pal);
         return pokedexCollectionRepository.save(pokedexCollection);
     }
+
+    public PokedexCollection getPokedexCollectionByID(Long collection_id_long) {
+        return pokedexCollectionRepository.findById(collection_id_long).get();
+    }
 }

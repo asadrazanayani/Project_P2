@@ -15,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Pokedex {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private Long pokedex_id;
     private String pokemon_name;
     private String pokemon_type_primary;
@@ -25,9 +25,16 @@ public class Pokedex {
     @ManyToOne(targetEntity = PokedexCollection.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "collection_id", referencedColumnName = "collection_id")
     private PokedexCollection pokedexCollection;
-//    private Long collection_id;
     @ManyToOne(targetEntity = PokedexWishlist.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "wishlist_id", referencedColumnName = "wishlist_id")
     private PokedexWishlist pokedexWishlist;
+
+    public Pokedex(PokedexCollection pokedexCollection) {
+        this.pokedexCollection = pokedexCollection;
+    }
+
+    public Pokedex(PokedexWishlist pokedexWishlist) {
+        this.pokedexWishlist = pokedexWishlist;
+    }
 
 }

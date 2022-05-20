@@ -18,4 +18,8 @@ public class PokedexWishlistService {
         PokedexWishlist pokedexWishlist = new PokedexWishlist(pokePal);
         return pokedexWishlistRepository.save(pokedexWishlist);
     }
+
+    public PokedexWishlist getpokedexWishlistByID(Long wishlist_id_long) {
+        return pokedexWishlistRepository.findById(wishlist_id_long).get();
+    }
 }

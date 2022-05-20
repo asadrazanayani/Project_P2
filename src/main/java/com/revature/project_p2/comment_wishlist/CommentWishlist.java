@@ -31,4 +31,15 @@ public class CommentWishlist {
     @ManyToOne(targetEntity = PokedexWishlist.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "wishlist_id", referencedColumnName = "wishlist_id")
     private PokedexWishlist pokedexWishlist;
+
+    public CommentWishlist(PokePal user, PokedexWishlist pokedexWishlist, String content) {
+        this.user = user;
+        this.pokedexWishlist = pokedexWishlist;
+        this.contents = content;
+    }
+
+    public CommentWishlist(String contents) {
+        this.contents = contents;
+    }
+
 }
