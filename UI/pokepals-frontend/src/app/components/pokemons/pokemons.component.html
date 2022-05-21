@@ -1,1 +1,35 @@
-<p>pokemons works!</p>
+<table class="table table-striped"> <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">img</th>
+      <th scope="col">Name</th>
+      <th scope="col">Primary Type</th>
+      <th scope="col">Secondary Type</th>
+      <th scope="col">Special Move</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of pokedexArr; let i = index" style="text-align: center;">
+        <td>{{i+1}}</td>
+        <td><img src = {{s.pokemon_img}} /> </td>
+        <td style="text-align: center;">{{s.pokemon_name}}</td>
+        <td>{{s.pokemon_type_primary}}</td>
+        <td>{{s.pokemon_type_secondary}}</td>
+        <td>{{s.pokemon_special_move}}</td>
+    </tr>
+   
+
+  </tbody>
+  </table>
+
+  <!-- pagination -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a (click)="paginationMoveDown()" class="page-link">Previous</a>
+      </li>
+      <li class="page-item">
+        <a (click)="paginationMoveUp()" class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
