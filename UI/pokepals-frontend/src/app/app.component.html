@@ -7,8 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello World</h1>
-    <app-pokemons></app-pokemons>
-    
+    <div class="container">
+        <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+          <div class="container-fluid">
+            <a class="navbar-brand" routerLink="/pokemons" >Pokemons</a>
+          </div>
+        </nav>
+      </div>
+    <div class="content-wrapper">
+        <router-outlet></router-outlet>
+    </div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Pokeapi } from '../Entity/Pokeapi';
-import { Pokemon } from '../Entity/Pokemon';
 
 
 @Injectable({
@@ -13,7 +12,6 @@ export class PokemonService {
   getPokemons(offset : number, limit : number) {
     return this.http.get<Pokeapi>(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
   }
-
   getPokedexData(name : string) {
     return this.http.get<any>("https://pokeapi.co/api/v2/pokemon/"+name);
     
