@@ -19,7 +19,7 @@ public class Pokedex {
     private Long pokedex_id;
     private String pokemon_name;
     private String pokemon_type_primary;
-    private String pokemon_type_secondary;
+    private Long pokemon_base_experience;
     private String pokemon_img_url;
     private String pokemon_special_move;
     @ManyToOne(targetEntity = PokedexCollection.class, cascade = CascadeType.ALL)

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { PokePal } from 'src/app/Entity/PokePal';
 import { Login } from 'src/app/Entity/Login';
 
@@ -7,6 +7,7 @@ import { Login } from 'src/app/Entity/Login';
   providedIn: 'root'
 })
 export class PokedexService {
+
 
   pokePal! : PokePal;
   loginUser! : Login;
@@ -25,4 +26,5 @@ export class PokedexService {
   getPokePalByEmailPass(login : Login) {
     return this.http.put(this.url+"/login", login);
   }
+
 }

@@ -2,14 +2,14 @@ package com.revature.project_p2.user;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping ("api/v1/user")
 public class PokePalController {
 
@@ -21,15 +21,34 @@ public class PokePalController {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public PokePal userRegister(@RequestBody PokePal user) {
-        userService.register(user);
-        return user;
+        return userService.register(user);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.PUT)
-    public boolean userLogin(@RequestBody String email, @RequestBody String password) {
-        return userService.login(email, password);
+    public PokePal userLogin(@RequestBody PokePal pokepal) {
+        return userService.login(pokepal);
     }
+
+    @PostMapping (
+            path = "{user_id}/image/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void uploadUserProfileImg(@PathVariable("user_id") Long user_id,
+                                     @RequestParam("file") MultipartFile file) {
+        userService.uploadUserProfileImg(user_id, file);
+
+    }
+
+    @RequestMapping(value = "{user_id}/image/download", method = RequestMethod.GET)
+    public byte[] downloadUserProfileImage(@PathVariable("user_id") Long user_id) {
+        return userService.downloadProfileImage(user_id);
+    }
+
+
+
+
 
 }

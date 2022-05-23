@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import axios from 'axios';
 import { Login } from 'src/app/Entity/Login';
 import { PokePal } from 'src/app/Entity/PokePal';
 import { PokedexService } from 'src/app/services/pokepal/pokedex.service';
@@ -12,12 +13,17 @@ export class HomeComponent implements OnInit {
   pokePal! : PokePal
   loginUser! : Login;
   isCorrectInfo : boolean = false;
+  hasUserID : boolean = false;
+  userIDForImageUpload : number = 0;
+  fileName = "";
+  itemImageUrl = "";
   
 
   constructor(private pokedexService : PokedexService) {}
 
   ngOnInit(): void {
     this.pokePal = {
+      user_id : 0,
       user_name : "",
       user_email : "",
       user_password : ""
@@ -31,7 +37,9 @@ export class HomeComponent implements OnInit {
 
   addUser() {
     this.pokedexService.addPokepal(this.pokePal).subscribe(response => {
-      console.log(response);
+      this.userIDForImageUpload = response.user_id
+      console.log(response.user_id);
+      this.hasUserID = true;
     })
   }
 
@@ -42,6 +50,28 @@ export class HomeComponent implements OnInit {
     }) 
   }
 
+  onFileSelected(event : any) { 
+    const file:File = event.target.files[0];
+
+    if (file) {
+        this.fileName = file.name;
+        console.log(file);
+        const formData = new FormData();
+        formData.append("file", file);
+        axios.post(`http://localhost:9003/api/v1/user/${this.userIDForImageUpload}/image/upload`, formData, {
+          headers : {
+            "Content-Types" : "multipart/form-data"
+          }
+        }).then(() => {
+          console.log("file uploaded")
+          this.itemImageUrl = `http://localhost:9003/api/v1/user/${this.userIDForImageUpload}/image/download`
+        }).catch(err => {
+          console.log("Error");
+        })
+        };
+        //https://blog.angular-university.io/angular-file-upload/
+  }
+
+  }
 
 
-}

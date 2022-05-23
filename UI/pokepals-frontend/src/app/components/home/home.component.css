@@ -7,6 +7,8 @@
     mix-blend-mode: multiply
 }
 
+
+
 body{
 	margin: 70px;
 	padding: 0;
@@ -22,7 +24,6 @@ body{
 	height: 500px;
 	background: #ADD8E6;
 	overflow: hidden;
-	/* background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover; */
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
 }
@@ -97,3 +98,59 @@ button:hover{
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
+
+/*Profile Pic Start*/
+.picture-container{
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+.picture{
+    width: 106px;
+    height: 106px;
+    background-color: #999999;
+    border: 4px solid #CCCCCC;
+    color: #FFFFFF;
+    border-radius: 50%;
+    margin: 0px auto;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+.picture:hover{
+    border-color: #2ca8ff;
+}
+.content.ct-wizard-green .picture:hover{
+    border-color: #05ae0e;
+}
+.content.ct-wizard-blue .picture:hover{
+    border-color: #3472f7;
+}
+.content.ct-wizard-orange .picture:hover{
+    border-color: #ff9500;
+}
+.content.ct-wizard-red .picture:hover{
+    border-color: #ff3b30;
+}
+.picture input[type="file"] {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.picture-src{
+    width: 100%;
+    
+}
+/*Profile Pic End*/
+
+.center-a-div {
+	padding: 80px 0;
+	text-align: center;
+  }
+  
