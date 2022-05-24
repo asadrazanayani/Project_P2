@@ -8,7 +8,6 @@ import { Login } from 'src/app/Entity/Login';
 })
 export class PokedexService {
 
-
   pokePal! : PokePal;
   loginUser! : Login;
   url : string = "http://localhost:9003/api/v1/user"
@@ -18,13 +17,18 @@ export class PokedexService {
   addPokepal(pokePal : PokePal)  {
     return this.http.post<PokePal>(this.url, pokePal)
   }
+  
+  getPokePalByEmailPass(loginPokePal : PokePal) {
+    return this.http.put<PokePal>(this.url+"/login", loginPokePal);
+  }
 
-  getPokePal() {
+  getAllPokePal() {
     return this.http.get<PokePal[]>(this.url);
   }
-  
-  getPokePalByEmailPass(login : Login) {
-    return this.http.put(this.url+"/login", login);
+
+  logout(loginPokePal: PokePal) {
+    return this.http.put<PokePal>(this.url+"logout", loginPokePal);
   }
+ 
 
 }

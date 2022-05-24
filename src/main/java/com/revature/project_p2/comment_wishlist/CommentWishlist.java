@@ -23,13 +23,15 @@ public class CommentWishlist {
     private Timestamp created_at;
     @UpdateTimestamp
     private Timestamp updated_at;
+
     @ManyToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "commenter_id", referencedColumnName = "user_id")
     private PokePal user;
+
     @Lob
     private String contents;
     @ManyToOne(targetEntity = PokedexWishlist.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "wishlist_id", referencedColumnName = "wishlist_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private PokedexWishlist pokedexWishlist;
 
     public CommentWishlist(PokePal user, PokedexWishlist pokedexWishlist, String content) {

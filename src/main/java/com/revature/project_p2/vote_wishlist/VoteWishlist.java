@@ -29,7 +29,7 @@ public class VoteWishlist {
     private PokePal pokePal;
     private VoteType voteType;
     @OneToOne(targetEntity = PokedexWishlist.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "wishlist_id", referencedColumnName = "wishlist_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private PokedexWishlist pokedexWishlist;
 
 }

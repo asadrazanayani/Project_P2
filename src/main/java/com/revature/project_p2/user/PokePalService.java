@@ -74,4 +74,11 @@ public class PokePalService {
         return fileStore.download(path, pokePal.getUser_img_url());
 
     }
+
+    public PokePal logout(PokePal pokePal) {
+        List<PokePal> users = userRepository.findUserForLogin(pokePal.getUser_email(), pokePal.getUser_password());
+        PokePal user = users.get(0);
+        user.setIs_logged_in(false);
+        return userRepository.save(user);
+    }
 }

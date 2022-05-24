@@ -28,7 +28,7 @@ public class PokePalController {
 
     @RequestMapping(value = "/login", method = RequestMethod.PUT)
     public PokePal userLogin(@RequestBody PokePal pokepal) {
-        return userService.login(pokepal);
+            return userService.login(pokepal);
     }
 
     @PostMapping (
@@ -45,6 +45,12 @@ public class PokePalController {
     @RequestMapping(value = "{user_id}/image/download", method = RequestMethod.GET)
     public byte[] downloadUserProfileImage(@PathVariable("user_id") Long user_id) {
         return userService.downloadProfileImage(user_id);
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.PUT)
+    public PokePal logout(@RequestBody PokePal pokePal) {
+        System.out.println("Here and logout");
+        return userService.logout(pokePal);
     }
 
 

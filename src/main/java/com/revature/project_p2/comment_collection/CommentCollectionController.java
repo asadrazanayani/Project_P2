@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/users/{user_id}/pokedex-collection/{collection_id}/comments")
+@RequestMapping("api/v1/users/{commenter_id}/collection/{collection_id}/comments")
 public class CommentCollectionController {
 
     @Autowired
     CommentCollectionService commentCollectionService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public CommentCollection add_comment(@PathVariable("user_id") String commenter_id,
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public CommentCollection add_comment(@PathVariable("commenter_id") String commenter_id,
                                          @PathVariable("collection_id") String collection_id,
-                                         @RequestBody CommentCollection commentCollection) {
+                                         @RequestBody CommentCollection comment) {
         Long commenter_id_long = Long.parseLong(commenter_id);
         Long collection_id_long = Long.parseLong(collection_id);
-        return commentCollectionService.add_comment(commentCollection, commenter_id_long, collection_id_long);
+        return commentCollectionService.add_comment(comment, collection_id_long, commenter_id_long);
     }
 }

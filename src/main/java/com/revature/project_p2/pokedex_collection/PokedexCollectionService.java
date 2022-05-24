@@ -5,6 +5,8 @@ import com.revature.project_p2.user.PokePalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PokedexCollectionService {
 
@@ -19,7 +21,8 @@ public class PokedexCollectionService {
         return pokedexCollectionRepository.save(pokedexCollection);
     }
 
-    public PokedexCollection getPokedexCollectionByID(Long collection_id_long) {
-        return pokedexCollectionRepository.findById(collection_id_long).get();
+    public PokedexCollection getPokedexCollectionByID(Long user_id) {
+        List<PokedexCollection> pokdedexCollection = pokedexCollectionRepository.findPokedexCollectionByUserID(user_id);
+        return pokdedexCollection.get(0);
     }
 }

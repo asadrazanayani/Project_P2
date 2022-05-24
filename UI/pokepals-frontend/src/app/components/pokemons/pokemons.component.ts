@@ -12,10 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PokemonsComponent implements OnInit {
   index : number = 0;
+  pokemonNameSearch : string = ""
+  pokedexArrRendered: Pokedex[] = []
 
   pokemons: any[] = [];
   pagination : number[] = [0, 20]; 
-  increment : number = 0;
+  increment : number = 20;
   pokeapi!: Pokeapi;
   pokedex! : Pokedex; 
   result!: Result;
@@ -99,5 +101,23 @@ export class PokemonsComponent implements OnInit {
     this.ngOnInit();
   }
 
+  getPokemonData() {
+    if (!this.pokemonNameSearch) {
+      this.pokedexArr = this.pokedexArrRendered;
+    } 
+    this.pokemonService.getPokedexData(this.pokemonNameSearch).subscribe(val => {
+      let object = JSON.parse(JSON.stringify(val))
+      this.pokedex = {
+        pokemon_img : object.sprites.front_default,
+        pokemon_name : object.species.name,
+        pokemon_type_primary : object.types[0].type.name,
+        pokemon_base_experience : val.base_experience,
+        pokemon_special_move : object.moves[0].move.name
+      }
+      this.pokedexArrRendered = this.pokedexArr;
+      this.pokedexArr = []
+      this.pokedexArr.push(this.pokedex)
+  });
+}
 
 }

@@ -13,7 +13,7 @@ public class PokedexWishlistController {
     @Autowired
     PokedexWishlistService pokedexWishlistService;
 
-    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public PokedexWishlist addPokedexWishlist(@PathVariable ("user_id") String user_id) {
         Long user_id_long = Long.parseLong(user_id);
         return pokedexWishlistService.addPokedexWishlist(user_id_long);

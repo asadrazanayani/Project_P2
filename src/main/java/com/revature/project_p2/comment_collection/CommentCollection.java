@@ -24,13 +24,19 @@ public class CommentCollection {
     private Timestamp created_at;
     @UpdateTimestamp
     private Timestamp updated_at;
+
+
     @ManyToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "commenter_id", referencedColumnName = "user_id")
     private PokePal user;
-    @Lob
+
+
+    @Column(columnDefinition = "TEXT")
     private String contents;
+
+
     @ManyToOne(targetEntity = PokedexCollection.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "collection_id", referencedColumnName = "collection_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private PokedexCollection pokedexCollection;
 
     public CommentCollection(PokePal user, PokedexCollection pokedexCollection, String content) {

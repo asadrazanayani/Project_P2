@@ -1,0 +1,16 @@
+.parent {
+    background: #CCCCCC;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.child {
+    text-align: center;
+    background: #FFFF00;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -35px 0 0 -35px;
+}

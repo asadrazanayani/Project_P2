@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule  } from '@angular/core';
 import axios from 'axios';
-import { Login } from 'src/app/Entity/Login';
 import { PokePal } from 'src/app/Entity/PokePal';
 import { PokedexService } from 'src/app/services/pokepal/pokedex.service';
+import { SessionServicesService } from 'src/app/services/session/session-services.service';
 
 @Component({
   selector: 'app-home',
@@ -10,43 +10,53 @@ import { PokedexService } from 'src/app/services/pokepal/pokedex.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  pokePal! : PokePal
-  loginUser! : Login;
-  isCorrectInfo : boolean = false;
+  displayNone = "display : ";
+  signuppokePal! : PokePal
+  loginPokePal! : PokePal;
   hasUserID : boolean = false;
-  userIDForImageUpload : number = 0;
-  fileName = "";
-  itemImageUrl = "";
-  
+  fileName : string = ""; // to upload img
+  fileUploadMessage : string = ""; 
 
-  constructor(private pokedexService : PokedexService) {}
+  test : string = "";
+  
+  constructor(private pokedexService : PokedexService, private sessionServices : SessionServicesService) {}
 
   ngOnInit(): void {
-    this.pokePal = {
+    this.test = "this is a test component";
+    this.signuppokePal = {
       user_id : 0,
       user_name : "",
       user_email : "",
-      user_password : ""
+      user_password : "",
+      user_img_url : "",
+      is_logged_in : false
     }
 
-    this.loginUser = {
+    this.loginPokePal = {
+      user_id : 0,
+      user_name : "",
       user_email : "",
-      user_password : ""
+      user_password : "",
+      user_img_url : "",
+      is_logged_in : false
     }
   }
 
   addUser() {
-    this.pokedexService.addPokepal(this.pokePal).subscribe(response => {
-      this.userIDForImageUpload = response.user_id
-      console.log(response.user_id);
+    console.log(this.signuppokePal);
+    this.pokedexService.addPokepal(this.signuppokePal).subscribe(response => {
+      this.signuppokePal.user_id  = response.user_id;
+      console.log(this.signuppokePal = response);
+      this.displayNone += "none";
       this.hasUserID = true;
     })
   }
 
   login() {
-    console.log(this.loginUser);
-    this.pokedexService.getPokePalByEmailPass(this.loginUser).subscribe(response => {
-      console.log(response);
+    this.pokedexService.getPokePalByEmailPass(this.loginPokePal).subscribe(pokePal => {
+      this.loginPokePal = pokePal;
+      console.log(this.loginPokePal);
+      this.sessionServices.postLoggedInUser(this.loginPokePal);
     }) 
   }
 
@@ -55,22 +65,34 @@ export class HomeComponent implements OnInit {
 
     if (file) {
         this.fileName = file.name;
-        console.log(file);
         const formData = new FormData();
         formData.append("file", file);
-        axios.post(`http://localhost:9003/api/v1/user/${this.userIDForImageUpload}/image/upload`, formData, {
+        // posting via axios
+        axios.post(`http://localhost:9003/api/v1/user/${this.signuppokePal.user_id}/image/upload`, formData, {
           headers : {
             "Content-Types" : "multipart/form-data"
+            // for images, content-type will be multipart
           }
         }).then(() => {
-          console.log("file uploaded")
-          this.itemImageUrl = `http://localhost:9003/api/v1/user/${this.userIDForImageUpload}/image/download`
+          this.fileUploadMessage = "Uploaded Successfully"
+          setTimeout(() => {
+            this.hasUserID = !this.hasUserID;
+            this.fileUploadMessage = "";
+          }, 2000)
+           
+
         }).catch(err => {
           console.log("Error");
         })
         };
         //https://blog.angular-university.io/angular-file-upload/
   }
+
+  sendLoggedInUser() {
+    this.sessionServices.postLoggedInUser(this.loginPokePal);
+  }
+
+
 
   }
 

@@ -3,5 +3,4 @@ export interface Pokeapi {
     next:string;
     previous:string;
     results:any[];
-    
 }

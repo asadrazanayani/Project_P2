@@ -29,6 +29,6 @@ public class VoteCollection {
     private PokePal pokePal;
     private VoteType voteType;
     @OneToOne(targetEntity = PokedexCollection.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "collection_id", referencedColumnName = "collection_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private PokedexCollection pokedexCollection;
 }

@@ -17,11 +17,11 @@ public class CommentCollectionService {
     @Autowired
     PokePalService pokePalService;
 
-    public CommentCollection add_comment(CommentCollection commentCollection, Long commenter_id_long, Long collection_id_long) {
+    public CommentCollection add_comment( CommentCollection comment,  Long collection_id_long, Long commenter_id_long) {
         PokedexCollection pokedexCollection = pokedexCollectionService.getPokedexCollectionByID(collection_id_long);
         PokePal commenter = pokePalService.getPokePalByID(commenter_id_long);
-        commentCollection.setUser(commenter);
-        commentCollection.setPokedexCollection(pokedexCollection);
-        return commentCollectionRepository.save(commentCollection);
+        comment.setUser(commenter);
+        comment.setPokedexCollection(pokedexCollection);
+        return commentCollectionRepository.save(comment);
     }
 }

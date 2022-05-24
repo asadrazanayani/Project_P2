@@ -1,0 +1,35 @@
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a type="button" class="btn btn-outline-primary" routerLink="/pokemons">See All Pokemons</a>
+            <button type="button" class="btn btn-outline-secondary" (click)="selectOtherPokePals()">{{otherPokepalMessage}}</button>
+            <button type="button" class="btn btn-outline-primary" (click)="selectViewCollection()">{{viewCollectionMessage}}</button>
+            <button type="button" class="btn btn-outline-success" (click)="selectViewWishist()">{{viewWishlistMessage}}</button>
+            <a type="button" class="btn btn-outline-dark" (click)="selectChangeProfile()">Change Profile Details</a>
+            <a type="button" class="btn btn-outline-danger"(click) = "logout()">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <span *ngIf="selectedButton === viewCollectionMessage">
+            <h3 style="text-align: center; margin-top: 50px;
+            margin-bottom: 50px;">Your Pokedex Collection</h3>
+        </span>
+
+        <span *ngIf="selectedButton === viewWishlistMessage">
+            <h3 style="text-align: center; margin-top: 50px;
+            margin-bottom: 50px;">Your Pokedex Wishlist</h3>
+        </span>
+
+
+        
+
+
+    </div>
+
+</div>
+
+    
+
+    
+
