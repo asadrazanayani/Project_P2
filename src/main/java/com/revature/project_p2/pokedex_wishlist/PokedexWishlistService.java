@@ -1,9 +1,10 @@
 package com.revature.project_p2.pokedex_wishlist;
 
-import com.revature.project_p2.user.PokePal;
 import com.revature.project_p2.user.PokePalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PokedexWishlistService {
@@ -13,13 +14,11 @@ public class PokedexWishlistService {
     @Autowired
     PokePalService pokePalService;
 
-    public PokedexWishlist addPokedexWishlist(Long user_id_long) {
-        PokePal pokePal = pokePalService.getPokePalByID(user_id_long);
-        PokedexWishlist pokedexWishlist = new PokedexWishlist(pokePal);
+    public PokedexWishlist addPokedexWishlist(PokedexWishlist pokedexWishlist) {
         return pokedexWishlistRepository.save(pokedexWishlist);
     }
 
-    public PokedexWishlist getpokedexWishlistByID(Long wishlist_id_long) {
-        return pokedexWishlistRepository.findById(wishlist_id_long).get();
+    public List<PokedexWishlist> getpokedexWishlistByID(Long user_id) {
+        return pokedexWishlistRepository.getpokedexWishlistByID(user_id);
     }
 }

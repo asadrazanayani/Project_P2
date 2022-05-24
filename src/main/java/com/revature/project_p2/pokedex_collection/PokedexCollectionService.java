@@ -1,6 +1,5 @@
 package com.revature.project_p2.pokedex_collection;
 
-import com.revature.project_p2.user.PokePal;
 import com.revature.project_p2.user.PokePalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +14,11 @@ public class PokedexCollectionService {
     @Autowired
     PokePalService pokePalService;
 
-    public PokedexCollection addPokedexCollection(Long user_id) {
-        PokePal pal = pokePalService.getPokePalByID(user_id);
-        PokedexCollection pokedexCollection = new PokedexCollection(pal);
+    public PokedexCollection addPokedexCollection(PokedexCollection pokedexCollection) {
         return pokedexCollectionRepository.save(pokedexCollection);
     }
 
-    public PokedexCollection getPokedexCollectionByID(Long user_id) {
-        List<PokedexCollection> pokdedexCollection = pokedexCollectionRepository.findPokedexCollectionByUserID(user_id);
-        return pokdedexCollection.get(0);
+    public List<PokedexCollection> getPokedexCollectionByID(Long user_id) {
+        return pokedexCollectionRepository.findPokedexCollectionByUserID(user_id);
     }
 }

@@ -3,19 +3,24 @@ package com.revature.project_p2.comment_collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/v1/users/{commenter_id}/collection/{collection_id}/comments")
+@RequestMapping("api/v1/comments")
 public class CommentCollectionController {
 
     @Autowired
     CommentCollectionService commentCollectionService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public CommentCollection add_comment(@PathVariable("commenter_id") String commenter_id,
-                                         @PathVariable("collection_id") String collection_id,
-                                         @RequestBody CommentCollection comment) {
-        Long commenter_id_long = Long.parseLong(commenter_id);
-        Long collection_id_long = Long.parseLong(collection_id);
-        return commentCollectionService.add_comment(comment, collection_id_long, commenter_id_long);
+    public CommentCollection add_comment(@RequestBody CommentCollection commentCollection) {
+        return commentCollectionService.add_comment(commentCollection);
     }
+
+    @RequestMapping(value = "/{user_id}", method = RequestMethod.GET)
+    public List<CommentCollection> getCommentsForCollection(@PathVariable("user_id") Long user_id) {
+        return commentCollectionService.getCommentsForCollection(user_id);
+    }
+
+
 }

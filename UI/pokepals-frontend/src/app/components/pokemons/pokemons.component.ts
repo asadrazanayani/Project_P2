@@ -41,7 +41,7 @@ export class PokemonsComponent implements OnInit {
 
   ngOnInit(): void {
     this.pokedex = {
-      pokemon_img : "",
+      pokemon_img_url : "",
       pokemon_name : "",
       pokemon_type_primary : "",
       pokemon_base_experience : 0 ,
@@ -58,7 +58,7 @@ export class PokemonsComponent implements OnInit {
           let object = JSON.parse(JSON.stringify(val))
           
           this.pokedex = {
-            pokemon_img : object.sprites.front_default,
+            pokemon_img_url : object.sprites.front_default,
             pokemon_name : object.species.name,
             pokemon_type_primary : object.types[0].type.name,
             pokemon_base_experience : val.base_experience,
@@ -108,7 +108,7 @@ export class PokemonsComponent implements OnInit {
     this.pokemonService.getPokedexData(this.pokemonNameSearch).subscribe(val => {
       let object = JSON.parse(JSON.stringify(val))
       this.pokedex = {
-        pokemon_img : object.sprites.front_default,
+        pokemon_img_url : object.sprites.front_default,
         pokemon_name : object.species.name,
         pokemon_type_primary : object.types[0].type.name,
         pokemon_base_experience : val.base_experience,

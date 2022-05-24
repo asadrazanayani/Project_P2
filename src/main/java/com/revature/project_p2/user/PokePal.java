@@ -1,5 +1,6 @@
 package com.revature.project_p2.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.revature.project_p2.comment_collection.CommentCollection;
 import com.revature.project_p2.pokedex_collection.PokedexCollection;
@@ -36,16 +37,29 @@ public class PokePal {
     private Timestamp updated_at;
     private Boolean is_logged_in = false;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private PokedexCollection pokedexCollection;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private PokedexWishlist pokedexWishlist;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "pokePal", cascade = CascadeType.ALL)
+    private List<PokedexCollection> pokedexCollection;
 
-    @OneToMany(mappedBy = "user")
-    private List<CommentCollection> commentCollection;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "pokePal", cascade = CascadeType.ALL)
+    private List<PokedexWishlist> pokedexWishlist;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "commenter", cascade = CascadeType.ALL)
+    private List<CommentCollection> commentCollections;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "pokePal", cascade = CascadeType.ALL)
+    private List<CommentCollection> commenterCollection;
+
+//    @OneToMany(mappedBy = "user")
+//    private List<CommentCollection> commentCollection;
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<CommentWishlist> commentWishlists;
+
 
 
     public PokePal(String user_email, String user_password) {
@@ -67,4 +81,7 @@ public class PokePal {
     }
 
 
+    public PokePal(Long user_id) {
+        this.user_id = user_id;
+    }
 }

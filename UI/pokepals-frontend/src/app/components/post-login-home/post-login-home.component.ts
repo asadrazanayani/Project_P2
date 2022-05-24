@@ -39,6 +39,7 @@ export class PostLoginHomeComponent implements OnInit {
   selectViewCollection() {
     this.selectedButton = this.viewCollectionMessage;
     this.loggedInPokePal = this.sessionService.getLoggedInUser();
+    this.sessionService.getPokedexCollection();
 
 
     console.log(this.loggedInPokePal);
