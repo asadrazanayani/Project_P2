@@ -3,6 +3,7 @@ package com.revature.project_p2.user;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.revature.project_p2.comment_collection.CommentCollection;
+import com.revature.project_p2.comment_wishlist.CommentWishlist;
 import com.revature.project_p2.pokedex_collection.PokedexCollection;
 import com.revature.project_p2.pokedex_wishlist.PokedexWishlist;
 import lombok.AllArgsConstructor;
@@ -46,13 +47,25 @@ public class PokePal {
     @OneToMany(mappedBy = "pokePal", cascade = CascadeType.ALL)
     private List<PokedexWishlist> pokedexWishlist;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "commenter_collection")
     @OneToMany(mappedBy = "commenter", cascade = CascadeType.ALL)
     private List<CommentCollection> commentCollections;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "pokePal_collection")
     @OneToMany(mappedBy = "pokePal", cascade = CascadeType.ALL)
     private List<CommentCollection> commenterCollection;
+
+    @JsonManagedReference(value = "commenter_wishlist")
+    @OneToMany(mappedBy = "commenter", cascade = CascadeType.ALL)
+    private List<CommentWishlist> commentWishlist;
+
+    @JsonManagedReference(value = "pokePal_wishlist")
+    @OneToMany(mappedBy = "pokePal", cascade = CascadeType.ALL)
+    private List<CommentWishlist> commenterWishlists;
+
+
+
+
 
 //    @OneToMany(mappedBy = "user")
 //    private List<CommentCollection> commentCollection;

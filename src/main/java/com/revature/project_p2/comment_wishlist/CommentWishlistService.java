@@ -25,3 +25,27 @@
 //        return commentWishlistRepository.save(commentWishlist);
 //    }
 //}
+
+package com.revature.project_p2.comment_wishlist;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CommentWishlistService {
+
+    @Autowired
+    CommentWishlistRepository commentWishlistRepository;
+
+    public CommentWishlist add_comment(CommentWishlist commentWishlist) {
+        return commentWishlistRepository.save(commentWishlist);
+    }
+
+    public List<CommentWishlist> getCommentsForWishlist(Long user_id_wishlist) {
+        return commentWishlistRepository.getCommentsForWishlist(user_id_wishlist);
+    }
+}
+
+

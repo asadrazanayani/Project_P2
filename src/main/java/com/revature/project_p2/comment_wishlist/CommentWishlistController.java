@@ -21,3 +21,30 @@
 //
 //    }
 //}
+
+package com.revature.project_p2.comment_wishlist;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("api/v1/comments-wishlist")
+public class CommentWishlistController {
+
+    @Autowired
+    CommentWishlistService commentWishlistService;
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public CommentWishlist add_comment_Wishlist(@RequestBody CommentWishlist commentwishlist) {
+        return commentWishlistService.add_comment(commentwishlist);
+    }
+
+    @RequestMapping(value = "/{user_id_wishlist}", method = RequestMethod.GET)
+    public List<CommentWishlist> getCommentsForWishlist(@PathVariable("user_id_wishlist") Long user_id_wishlist) {
+        return commentWishlistService.getCommentsForWishlist(user_id_wishlist);
+    }
+
+
+}
