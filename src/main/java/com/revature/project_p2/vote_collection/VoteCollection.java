@@ -7,7 +7,6 @@
 //import lombok.Data;
 //import lombok.NoArgsConstructor;
 //import org.hibernate.annotations.CreationTimestamp;
-//import org.hibernate.annotations.UpdateTimestamp;
 //
 //import javax.persistence.*;
 //import java.sql.Timestamp;
@@ -22,8 +21,6 @@
 //    private Long vote_id;
 //    @CreationTimestamp
 //    private Timestamp created_at;
-//    @UpdateTimestamp
-//    private Timestamp updated_at;
 //    @OneToOne(targetEntity = PokePal.class, cascade = CascadeType.ALL)
 //    @JoinColumn(name = "voter_id", referencedColumnName = "user_id")
 //    private PokePal pokePal;
@@ -32,3 +29,26 @@
 //    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
 //    private PokedexCollection pokedexCollection;
 //}
+
+
+/*
+    @Id
+    @GeneratedValue
+    private Long comment_id;
+    @CreationTimestamp
+    private Timestamp created_at;
+
+    @ManyToOne()
+    @JoinColumn(name = "commenter_id")
+    @JsonBackReference(value = "commenter_collection")
+    private PokePal commenter;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    @JsonBackReference(value = "pokePal_collection")
+    private PokePal pokePal;
+
+    @Column(columnDefinition = "TEXT")
+    private String contents;
+
+ */

@@ -30,10 +30,6 @@ public class PokePalService {
         return userRepository.save(user);
     }
 
-    public PokePal getPokePalByID(Long user_id) {
-        return userRepository.findById(user_id).get();
-    }
-
     public List<PokePal> getAllUsers() {
         return userRepository.findAll();
     }
@@ -80,5 +76,13 @@ public class PokePalService {
         PokePal user = users.get(0);
         user.setIs_logged_in(false);
         return userRepository.save(user);
+    }
+
+    public PokePal getUserInfo(Long user_id) {
+        return userRepository.findById(user_id).get();
+    }
+
+    public PokePal getUserForComment(Long comment_id) {
+        return userRepository.getUserForComment(comment_id);
     }
 }

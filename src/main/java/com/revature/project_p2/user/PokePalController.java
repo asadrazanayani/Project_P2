@@ -53,7 +53,15 @@ public class PokePalController {
         return userService.logout(pokePal);
     }
 
+    @RequestMapping(value = "{user_id}", method = RequestMethod.GET)
+    public PokePal getUserInfo(@RequestParam("user_id") Long user_id) {
+        return userService.getUserInfo(user_id);
+    }
 
+    @RequestMapping(value = "commentInfo/{comment_id}", method = RequestMethod.GET)
+    public PokePal getUserForComment(@PathVariable("comment_id") Long comment_id) {
+        return userService.getUserForComment(comment_id);
+    }
 
 
 
