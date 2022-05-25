@@ -12,9 +12,10 @@ import { SessionServicesService } from 'src/app/services/session/session-service
   styleUrls: ['./post-login-home.component.css']
 })
 export class PostLoginHomeComponent implements OnInit {
+  index! : number;
   loggedInPokePal! : PokePal;
   loggedInPokePalCollection : any[] = [];
-  pokedexWishlist! : PokedexWishlist;
+  loggedInPokePalWishlist : any[] = [];
 
   //TODO: Remove this. only for development
   dummyPokePal! : PokePal;
@@ -38,10 +39,8 @@ export class PostLoginHomeComponent implements OnInit {
    // get the loggedInPokePal after login/signup
   ngOnInit(): void {
     this.loggedInPokePal = this.getLoggedInPokePal();
-    this.selectedButton = this.viewCollectionMessage;
+    this.selectViewCollection();
     console.log(this.loggedInPokePal);
-
-
     this.pokePalOther = {
       user_email : "",
       user_id : 0,
@@ -98,10 +97,10 @@ export class PostLoginHomeComponent implements OnInit {
     this.selectedButton = this.viewCollectionMessage;
     console.log(this.loggedInPokePal);
     this.pokedexService.getUserPokedexCollection(this.loggedInPokePal.user_id).subscribe(val => {
-      console.log(val);
+      // console.log(val);
       this.loggedInPokePalCollection = val;
+      console.log(this.loggedInPokePalCollection)
     })
-    console.log(this.loggedInPokePalCollection)
     this.sessionService.postLoggedInPokePalCollection(this.loggedInPokePalCollection)
 
 
@@ -110,6 +109,12 @@ export class PostLoginHomeComponent implements OnInit {
   selectViewWishist() {
     this.selectedButton = this.viewWishlistMessage;
     console.log(this.loggedInPokePal);
+     this.pokedexService.getUserPokedexWishlist(this.loggedInPokePal.user_id).subscribe(val => {
+      // console.log(val);
+      this.loggedInPokePalWishlist = val;
+      console.log(this.loggedInPokePalWishlist)
+    })
+    this.sessionService.postLoggedInPokePalWishlist(this.loggedInPokePalWishlist);
   }
   
   selectChangeProfile() {

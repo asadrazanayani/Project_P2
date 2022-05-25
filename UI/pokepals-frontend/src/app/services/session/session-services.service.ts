@@ -3,13 +3,16 @@ import { PokePal } from 'src/app/Entity/PokePal';
 import { HttpClient } from '@angular/common/http';
 import axios from 'axios';
 import { PokedexCollection } from 'src/app/Entity/PokedexCollection';
+import { PokedexWishlist } from 'src/app/Entity/PokedexWishlist';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionServicesService {
 
+
   loggedInPokePalCollection! : PokedexCollection[];
+  loggedInPokePalWishlist! : PokedexWishlist[];
 
   dummyPokePal : PokePal = {
     user_id :  207,
@@ -49,6 +52,10 @@ export class SessionServicesService {
 
   postLoggedInPokePalCollection(pokedexCollection: PokedexCollection[]) {
     this.loggedInPokePalCollection = pokedexCollection
+  }
+
+  postLoggedInPokePalWishlist(loggedInPokePalWishlist: PokedexWishlist[]) {
+    this.loggedInPokePalWishlist = loggedInPokePalWishlist
   }
 
   

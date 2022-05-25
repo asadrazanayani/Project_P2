@@ -41,6 +41,11 @@ export class PokedexService {
   addPokedexToCollection(pokedex : Pokedex) {
     return this.http.post<Pokedex>(this.url + `/pokedex-collection`,pokedex)
   }
+
+  getUserPokedexWishlist(user_id: number) {
+    return this.http.get<any[]>(this.url + `/pokedex-wishlist/${user_id}`);
+  }
+
   addPokedexToWishlist(pokedex : Pokedex) {
     return this.http.post<Pokedex>(this.url + `/pokedex-wishlist`,pokedex)
   }
