@@ -20,17 +20,20 @@
             <h3 style="text-align: center; margin-top: 50px;
             margin-bottom: 50px;">Your Pokedex Wishlist</h3>
         </span>
-
-        <span *ngIf="selectedButton === viewWishlistMessage">
+        <span *ngIf="selectedButton === otherPokepalMessage">
             <h3 style="text-align: center; margin-top: 50px;
-            margin-bottom: 50px;">Your Pokedex Wishlist</h3>
+            margin-bottom: 50px;">Other Pokedex Users</h3>
+            <div class="users-grid" *ngFor="let s of OtherPokePals; let i = index">
+                <div class="box">
+                    <h6>{{s.user_name}}</h6>
+                    <img src="{{s.user_img_url}}">
+                    <h6>{{s.user_email}}</h6>
+                </div>
+            </div>
         </span>
+        
 
-        <span *ngIf="selectedButton === viewWishlistMessage">
-            <h3 style="text-align: center; margin-top: 50px;
-            margin-bottom: 50px;">Your Pokedex Wishlist</h3>
-        </span>
-
+    
 
         
 

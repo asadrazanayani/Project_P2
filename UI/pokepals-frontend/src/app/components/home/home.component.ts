@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
       user_password : "",
       user_img_url : "",
       is_logged_in : false
+
     }
 
     this.loginPokePal = {
