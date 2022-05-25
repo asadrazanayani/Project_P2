@@ -31,7 +31,7 @@ public class PokePal {
     private String user_email;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String user_password;
-    private String user_img_url;
+    private String user_img_url = "";
     @CreationTimestamp
     private Timestamp created_at;
     @UpdateTimestamp

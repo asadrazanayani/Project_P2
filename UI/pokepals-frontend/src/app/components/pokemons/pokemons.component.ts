@@ -4,6 +4,10 @@ import { Pokeapi } from 'src/app/Entity/Pokeapi';
 import { Pokedex } from 'src/app/Entity/Pokedex';
 import { Result } from 'src/app/Entity/Result';
 import { ActivatedRoute } from '@angular/router';
+import { PokedexCollection } from 'src/app/Entity/PokedexCollection';
+import { PokedexService } from 'src/app/services/pokepal/pokedex.service';
+import { PokePal } from 'src/app/Entity/PokePal';
+import { SessionServicesService } from 'src/app/services/session/session-services.service';
 
 @Component({
   selector: 'app-pokemons',
@@ -14,6 +18,9 @@ export class PokemonsComponent implements OnInit {
   index : number = 0;
   pokemonNameSearch : string = ""
   pokedexArrRendered: Pokedex[] = []
+  loggedInPokePalCollection! : PokedexCollection[]
+  loggedInPokePal! : PokePal;
+  
 
   pokemons: any[] = [];
   pagination : number[] = [0, 20]; 
@@ -35,7 +42,7 @@ export class PokemonsComponent implements OnInit {
     // pokemon_type_secondary:String;
     // pokemon_special_move: String;
 
-  constructor(private pokemonService : PokemonService, private route : ActivatedRoute) {
+  constructor(private pokemonService : PokemonService, private route : ActivatedRoute, private pokedexServices : PokedexService, private sessionService : SessionServicesService) {
 
    }
 
@@ -48,6 +55,8 @@ export class PokemonsComponent implements OnInit {
       pokemon_special_move : ""
     }
     this.getStartData();
+    this.loggedInPokePal = this.sessionService.getLoggedInUser();
+    console.log(this.loggedInPokePal);
   }
 
   getStartData() {
@@ -71,13 +80,23 @@ export class PokemonsComponent implements OnInit {
     
   }
 
-  addToWishlist(data : any) {
-    console.log(data);
+  addToWishlist(pokedex : Pokedex) {
+    pokedex.pokePal = this.loggedInPokePal.user_id; 
+    console.log(pokedex);
+    this.pokedexServices.addPokedexToWishlist(pokedex).subscribe(response => {
+      console.log(response);
+    });
+    
   }
 
-  addToCollection(data : any) {
-    console.log(data);
+  addToCollection(pokedex : Pokedex) {
+    pokedex.pokePal = this.loggedInPokePal.user_id; 
+    console.log(pokedex);
+    this.pokedexServices.addPokedexToCollection(pokedex).subscribe(response => {
+      console.log(response);
+    });
   }
+
   paginationMoveDown() {
     if (this.pagination[0] >= 0) this.pagination[0] = this.pagination[0] - this.increment;
     if (this.pagination[1] >= 10) this.pagination[1] = this.pagination[1] - this.increment;

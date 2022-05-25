@@ -7,13 +7,23 @@
             <button type="button" class="btn btn-outline-primary" (click)="selectViewCollection()">{{viewCollectionMessage}}</button>
             <button type="button" class="btn btn-outline-success" (click)="selectViewWishist()">{{viewWishlistMessage}}</button>
             <a type="button" class="btn btn-outline-dark" (click)="selectChangeProfile()">Change Profile Details</a>
+            <span *ngIf="!loggedInPokePal"> 
+            <button type="button" class="btn btn-outline-info" routerLink="" >Login</button>
+        </span>
+        <span *ngIf="loggedInPokePal">
             <a type="button" class="btn btn-outline-danger"(click) = "logout()">Logout</a>
+        </span>
         </div>
     </nav>
     <div class="container">
         <span *ngIf="selectedButton === viewCollectionMessage">
             <h3 style="text-align: center; margin-top: 50px;
             margin-bottom: 50px;">Your Pokedex Collection</h3>
+            <span *ngIf="!loggedInPokePalCollection.length" style="text-align: center;">
+                <h4 >You do not have any pokedex in your collection. Add Them Now</h4>
+                <a type="button"class="btn btn-outline-primary" routerLink="/pokemons">See All Pokemons</a>
+
+            </span>
         </span>
 
         <span *ngIf="selectedButton === viewWishlistMessage">
@@ -26,9 +36,18 @@
             <div class="users-grid" *ngFor="let s of OtherPokePals; let i = index">
                 <div class="box">
                     <h6>{{s.user_name}}</h6>
-                    <img src="{{s.user_img_url}}">
-                    <h6>{{s.user_email}}</h6>
+                    <img class="rounded mx-auto d-block" src="{{s.user_img_url}}">
+                    Size of Pokedex Collection : {{s.pokedexCollection.length}}<br>
+                    Size of Pokedex Wishlist : {{s.pokedexWishlist.length}}<br>
+                    Number of Comments on Collection : {{s.commentCollections.length}}<br>
+                    Number of Comments on Wishlist : {{s.commentWishlist.length}}<br>
+                    <span style="display: inline;">
+                    <button type="button" class="btn btn-outline-primary">View User Pokedex Collection</button>
+                    <button type="button" class="btn btn-outline-success">View User Pokedex Wishlist</button>
+                </span>
+                    <br>
                 </div>
+
             </div>
         </span>
         

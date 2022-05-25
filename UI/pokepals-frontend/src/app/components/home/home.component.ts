@@ -29,7 +29,11 @@ export class HomeComponent implements OnInit {
       user_email : "",
       user_password : "",
       user_img_url : "",
-      is_logged_in : false
+      is_logged_in : false,
+      pokedexCollection: [],
+      pokedexWishlist: [],
+      commentCollections : [],
+      commentWishlist :  [],
 
     }
 
@@ -39,7 +43,11 @@ export class HomeComponent implements OnInit {
       user_email : "",
       user_password : "",
       user_img_url : "",
-      is_logged_in : false
+      is_logged_in : false,
+      pokedexCollection: [],
+      pokedexWishlist: [],
+      commentCollections : [],
+      commentWishlist :  [],
     }
   }
 

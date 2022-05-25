@@ -1,4 +1,7 @@
 import { PokedexCollection } from "./PokedexCollection";
+import { PokedexWishlist } from "./PokedexWishlist";
+import { CommentCollection } from "./CommentCollection";
+import { CommentWishlist } from "./CommentWishlist";
 
 export interface PokePal {
     user_id: number;
@@ -7,7 +10,8 @@ export interface PokePal {
     user_password : string;
     user_img_url : string;
     is_logged_in : boolean;
-    // pokedex_collection_size : number;
-    // pokedex_collection : PokedexCollection[];
-
+    pokedexCollection: any[];
+    pokedexWishlist: any[];
+    commentCollections : any[];
+    commentWishlist :  any[];
 }

@@ -13,11 +13,15 @@ import { SessionServicesService } from 'src/app/services/session/session-service
 })
 export class PostLoginHomeComponent implements OnInit {
   loggedInPokePal! : PokePal;
-  pokedexCollection! : PokedexCollection;
+  loggedInPokePalCollection : any[] = [];
   pokedexWishlist! : PokedexWishlist;
 
+  //TODO: Remove this. only for development
+  dummyPokePal! : PokePal;
+  //
+
   //for otherpokepals
-  OtherPokePals : PokePal[] = []
+  OtherPokePals = new Set<PokePal>();
   pokePalOther! : PokePal;
   // end of otherpokepals
 
@@ -35,6 +39,7 @@ export class PostLoginHomeComponent implements OnInit {
   ngOnInit(): void {
     this.loggedInPokePal = this.getLoggedInPokePal();
     this.selectedButton = this.viewCollectionMessage;
+    console.log(this.loggedInPokePal);
 
 
     this.pokePalOther = {
@@ -44,12 +49,18 @@ export class PostLoginHomeComponent implements OnInit {
       user_name : "",
       user_password : "",
       is_logged_in : false,
+      pokedexCollection: [],
+      pokedexWishlist: [],
+      commentCollections : [],
+      commentWishlist :  [],
     }
   }
 
   selectOtherPokePals() {
     this.selectedButton = this.otherPokepalMessage
+    this.OtherPokePals = new Set<PokePal>();
     this.pokedexService.getAllPokePal().subscribe(val => {
+      console.log(val);
       val.forEach(pokePal => {
         this.pokePalOther = {
           user_email : "",
@@ -58,12 +69,26 @@ export class PostLoginHomeComponent implements OnInit {
           user_name : "",
           user_password : "",
           is_logged_in : false,
+          pokedexCollection: [],
+          pokedexWishlist: [],
+          commentCollections : [],
+          commentWishlist :  [],
         }
         this.pokePalOther.user_email = pokePal.user_email;
         this.pokePalOther.user_name = pokePal.user_name;
         this.pokePalOther.user_img_url = `http://localhost:9003/api/v1/user/${pokePal.user_id}/image/download`
-        this.OtherPokePals.push(this.pokePalOther);
+        this.pokePalOther.commentCollections = pokePal.commentCollections;
+        this.pokePalOther.commentWishlist = pokePal.commentWishlist;
+        this.pokePalOther.pokedexCollection = pokePal.pokedexCollection;
+        this.pokePalOther.pokedexWishlist = pokePal.pokedexWishlist
+        if (this.pokePalOther.user_email === this.loggedInPokePal.user_email) {
+          // do not add
+        } else {
+        this.OtherPokePals.add(this.pokePalOther);
+      }
+        
       })
+      console.log(this.OtherPokePals);
     })
 
     console.log(this.loggedInPokePal);
@@ -71,11 +96,20 @@ export class PostLoginHomeComponent implements OnInit {
   
   selectViewCollection() {
     this.selectedButton = this.viewCollectionMessage;
+    console.log(this.loggedInPokePal);
+    this.pokedexService.getUserPokedexCollection(this.loggedInPokePal.user_id).subscribe(val => {
+      console.log(val);
+      this.loggedInPokePalCollection = val;
+    })
+    console.log(this.loggedInPokePalCollection)
+    this.sessionService.postLoggedInPokePalCollection(this.loggedInPokePalCollection)
+
+
   }
   
   selectViewWishist() {
     this.selectedButton = this.viewWishlistMessage;
-    console.log(this.selectedButton);
+    console.log(this.loggedInPokePal);
   }
   
   selectChangeProfile() {
