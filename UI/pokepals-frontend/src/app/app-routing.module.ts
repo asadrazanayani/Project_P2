@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PokemonsComponent } from './components/pokemons/pokemons.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { PostLoginHomeComponent } from './components/post-login-home/post-login-home.component';
+import { OtherPokepalViewComponent } from './components/other-pokepal-view/other-pokepal-view.component';
 const routes: Routes = [
   {
     path : 'pokemons', component:PokemonsComponent
@@ -16,7 +17,14 @@ const routes: Routes = [
   },
   {
     path : 'post-login', component : PostLoginHomeComponent
+  },
+  {
+    path : 'other-view-collection', component : OtherPokepalViewComponent
+  },
+  {
+    path : 'other-view-wishlist', component : OtherPokepalViewComponent
   }
+
 ];
 
 @NgModule({

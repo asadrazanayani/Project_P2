@@ -14,6 +14,9 @@ export class SessionServicesService {
   loggedInPokePalCollection! : PokedexCollection[];
   loggedInPokePalWishlist! : PokedexWishlist[];
 
+  otherPokePalViewWishlist! : PokePal;
+  otherPokePalViewCollection! : PokePal;
+
   dummyPokePal : PokePal = {
     user_id :  207,
     user_name: "",
@@ -57,6 +60,24 @@ export class SessionServicesService {
   postLoggedInPokePalWishlist(loggedInPokePalWishlist: PokedexWishlist[]) {
     this.loggedInPokePalWishlist = loggedInPokePalWishlist
   }
+
+  postOtherPokePalViewWishlist(otherPokePalViewWishlist: PokePal) {
+    this.otherPokePalViewWishlist = otherPokePalViewWishlist;
+    // console.log(this.otherPokePalViewWishlist)
+  }
+  postOtherPokePalViewCollection(otherPokePalViewCollection: PokePal) {
+    this.otherPokePalViewCollection = otherPokePalViewCollection;
+    // console.log(this.otherPokePalViewCollection)
+  }
+
+  getOtherPokePalViewWishlist() {
+    return this.otherPokePalViewWishlist;
+  }
+
+  getOtherPokePalViewCollection() {
+    return this.otherPokePalViewCollection;
+  }
+
 
   
 }

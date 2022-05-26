@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import axios from 'axios';
-import { PokedexCollection } from 'src/app/Entity/PokedexCollection';
-import { PokedexWishlist } from 'src/app/Entity/PokedexWishlist';
+// import axios from 'axios';
+// import { PokedexCollection } from 'src/app/Entity/PokedexCollection';
+// import { PokedexWishlist } from 'src/app/Entity/PokedexWishlist';
 import { Comment } from 'src/app/Entity/Comment';
 import { PokePal } from 'src/app/Entity/PokePal';
 import { PokedexService } from 'src/app/services/pokepal/pokedex.service';
@@ -26,8 +26,13 @@ export class PostLoginHomeComponent implements OnInit {
 
   //for otherpokepals
   OtherPokePals = new Set<PokePal>();
-  pokePalOther! : PokePal;
+  otherPokePal! : PokePal;
   // end of otherpokepals
+
+  //otherPokePalView
+  otherPokePalViewCollection! : PokePal;
+  otherPokePalViewWishlist! : PokePal;
+  //
 
   otherPokepalMessage = "See Other PokePals";
   viewCollectionMessage = "See your Pokedex Collection";
@@ -45,7 +50,7 @@ export class PostLoginHomeComponent implements OnInit {
     this.loggedInPokePal = this.getLoggedInPokePal();
     this.selectViewCollection();
     console.log(this.loggedInPokePal);
-    this.pokePalOther = {
+    this.otherPokePal = {
       user_email : "",
       user_id : 0,
       user_img_url : "",
@@ -65,7 +70,7 @@ export class PostLoginHomeComponent implements OnInit {
     this.pokedexService.getAllPokePal().subscribe(val => {
       console.log(val);
       val.forEach(pokePal => {
-        this.pokePalOther = {
+        this.otherPokePal = {
           user_email : "",
           user_id : 0,
           user_img_url : "",
@@ -77,17 +82,18 @@ export class PostLoginHomeComponent implements OnInit {
           commentCollections : [],
           commentWishlist :  [],
         }
-        this.pokePalOther.user_email = pokePal.user_email;
-        this.pokePalOther.user_name = pokePal.user_name;
-        this.pokePalOther.user_img_url = `http://localhost:9003/api/v1/user/${pokePal.user_id}/image/download`
-        this.pokePalOther.commentCollections = pokePal.commentCollections;
-        this.pokePalOther.commentWishlist = pokePal.commentWishlist;
-        this.pokePalOther.pokedexCollection = pokePal.pokedexCollection;
-        this.pokePalOther.pokedexWishlist = pokePal.pokedexWishlist
-        if (this.pokePalOther.user_email === this.loggedInPokePal.user_email) {
+        this.otherPokePal.user_id = pokePal.user_id;
+        this.otherPokePal.user_email = pokePal.user_email;
+        this.otherPokePal.user_name = pokePal.user_name;
+        this.otherPokePal.user_img_url = `http://localhost:9003/api/v1/user/${pokePal.user_id}/image/download`
+        this.otherPokePal.commentCollections = pokePal.commentCollections;
+        this.otherPokePal.commentWishlist = pokePal.commentWishlist;
+        this.otherPokePal.pokedexCollection = pokePal.pokedexCollection;
+        this.otherPokePal.pokedexWishlist = pokePal.pokedexWishlist
+        if (this.otherPokePal.user_email === this.loggedInPokePal.user_email) {
           // do not add
         } else {
-        this.OtherPokePals.add(this.pokePalOther);
+        this.OtherPokePals.add(this.otherPokePal);
       }
         
       })
@@ -173,6 +179,16 @@ export class PostLoginHomeComponent implements OnInit {
     console.log(this.selectedButton);
   }
 
+  otherUserCollection(otherPokePal : PokePal) {
+    this.otherPokePalViewCollection = otherPokePal;
+    this.sessionService.postOtherPokePalViewCollection(this.otherPokePalViewCollection);
+  }
+
+  otherUserWishlist(otherPokePal : PokePal) {
+    this.otherPokePalViewWishlist = otherPokePal;
+    this.sessionService.postOtherPokePalViewWishlist(this.otherPokePalViewWishlist);
+    
+  }
 
 }
 

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { PostLoginHomeComponent } from './components/post-login-home/post-login-home.component';
+import { OtherPokepalViewComponent } from './components/other-pokepal-view/other-pokepal-view.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PostLoginHomeComponent } from './components/post-login-home/post-login-
     PokemonsComponent,
     HomeComponent,
     AllUsersComponent,
-    PostLoginHomeComponent
+    PostLoginHomeComponent,
+    OtherPokepalViewComponent
   ],
   imports: [
     BrowserModule,

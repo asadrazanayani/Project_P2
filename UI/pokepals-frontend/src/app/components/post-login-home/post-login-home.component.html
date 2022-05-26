@@ -134,6 +134,8 @@
 <!-- End of the Wishlist -->
         </span>
 
+        <!-- Other PokePals -->
+
         <span *ngIf="selectedButton === otherPokepalMessage">
             <h3 style="text-align: center; margin-top: 50px;
             margin-bottom: 50px;">Other Pokedex Users</h3>
@@ -143,11 +145,14 @@
                     <img class="rounded mx-auto d-block" src="{{s.user_img_url}}">
                     Size of Pokedex Collection : {{s.pokedexCollection.length}}<br>
                     Size of Pokedex Wishlist : {{s.pokedexWishlist.length}}<br>
-                    Number of Comments on Collection : {{s.commentCollections.length}}<br>
-                    Number of Comments on Wishlist : {{s.commentWishlist.length}}<br>
+                    Number of Comments Made on Collection : {{s.commentCollections.length}}<br>
+                    Number of Comments Made on Wishlist : {{s.commentWishlist.length}}<br>
                     <span style="display: inline;">
-                    <button type="button" class="btn btn-outline-primary">View User Pokedex Collection</button>
-                    <button type="button" class="btn btn-outline-success">View User Pokedex Wishlist</button>
+                      <a  routerLink="/other-view-collection" (click)="otherUserCollection(s)"><button type="button" class="btn btn-outline-primary" >View User Pokedex Collection</button></a>
+<!--  -->
+                      <a  routerLink="/other-view-wishlist" (click)="otherUserWishlist(s)">
+                    <button type="button" class="btn btn-outline-success" >View User Pokedex Wishlist</button></a>
+                    <!--  -->
                 </span>
                     <br>
                 </div>
