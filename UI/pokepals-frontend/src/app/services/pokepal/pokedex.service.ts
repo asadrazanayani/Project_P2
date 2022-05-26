@@ -10,9 +10,6 @@ import { Pokedex } from 'src/app/Entity/Pokedex';
 })
 export class PokedexService {
 
-
-
-
   pokePal! : PokePal;
   loginUser! : Login;
   url : string = "http://localhost:9003/api/v1"
@@ -20,7 +17,7 @@ export class PokedexService {
   constructor(private http:HttpClient) { }
 
   addPokepal(pokePal : PokePal)  {
-    return this.http.post<PokePal>(this.url, pokePal)
+    return this.http.post<PokePal>(this.url+"/user", pokePal)
   }
   
   getPokePalByEmailPass(loginPokePal : PokePal) {
@@ -65,6 +62,15 @@ export class PokedexService {
   getPokePalForCommentWishlist(comment_id: number) {
     return this.http.get<PokePal>(this.url+`/user/commentInfo-wishlist/${comment_id}`)
   }
+
+  addCommentCollection(comment: any) {
+    return this.http.post(this.url + `/comments`, comment);
+  }
+
+  addCommentWishlist(comment: any) {
+    return this.http.post(this.url + `/comments-wishlist`, comment);
+  }
+
  
  
 

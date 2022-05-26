@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface CommentCollectionRepository extends JpaRepository<CommentCollection, Long> {
 
-    @Query(value = "Select * from comment_collection where user_id = ?1", nativeQuery = true)
+    @Query(value = "Select * from comment_collection where user_id = ?1 ORDER BY created_at;", nativeQuery = true)
     List<CommentCollection> getCommentsForCollection(Long user_id);
 }

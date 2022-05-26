@@ -41,6 +41,8 @@ export class PostLoginHomeComponent implements OnInit {
   logoutMessage = "Logout";
   selectedButton : string = "";
 
+  messageText : string = '';
+
   constructor(private pokedexService : PokedexService, private sessionService : SessionServicesService) {
     
 
@@ -150,6 +152,7 @@ export class PostLoginHomeComponent implements OnInit {
       this.comments = response;
       console.log(this.comments[0].comment_id_wishlist);
       console.log(this.commentsName.length);
+
     });
     setTimeout(() => {
       this.comments.forEach(comment => {
@@ -188,6 +191,49 @@ export class PostLoginHomeComponent implements OnInit {
     this.otherPokePalViewWishlist = otherPokePal;
     this.sessionService.postOtherPokePalViewWishlist(this.otherPokePalViewWishlist);
     
+  }
+
+  postCommentOnCollection() {
+    console.log(this.messageText);
+    let comment : any;
+    comment = {
+      commenter : 0,
+      contents : "",
+      pokePal : 0
+    }
+    comment.commenter = this.loggedInPokePal.user_id; 
+    comment.contents = this.messageText;
+    comment.pokePal = this.loggedInPokePal.user_id;
+    console.log(comment);
+    this.messageText = "";
+    this.pokedexService.addCommentCollection(comment).subscribe(val => {
+      console.log(val);
+
+    });
+    setTimeout(() => {
+      this.selectViewCollection();
+    }, 1000)
+  }
+  
+  postCommentOnWishlist() {
+    console.log(this.messageText);
+    let comment : any;
+    comment = {
+      commenter : 0,
+      contents : "",
+      pokePal : 0
+    }
+    comment.commenter = this.loggedInPokePal.user_id; 
+    comment.contents = this.messageText;
+    comment.pokePal = this.loggedInPokePal.user_id;
+    console.log(comment);
+    this.messageText = "";
+    this.pokedexService.addCommentWishlist(comment).subscribe(val => {
+      console.log(val);
+    });
+    setTimeout(() => {
+      this.selectViewWishist();
+    }, 1000)
   }
 
 }
