@@ -10,6 +10,7 @@ import { Pokedex } from 'src/app/Entity/Pokedex';
 })
 export class PokedexService {
 
+
   pokePal! : PokePal;
   loginUser! : Login;
   url : string = "http://localhost:9003/api/v1"
@@ -69,6 +70,10 @@ export class PokedexService {
 
   addCommentWishlist(comment: any) {
     return this.http.post(this.url + `/comments-wishlist`, comment);
+  }
+
+  updateLoggedInUserInfo(loggedInPokePal: PokePal) {
+    return this.http.put(this.url + `/user/${loggedInPokePal.user_id}` , loggedInPokePal)
   }
 
  

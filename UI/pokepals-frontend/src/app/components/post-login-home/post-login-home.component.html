@@ -40,7 +40,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let s of loggedInPokePalCollection; let i = index">
-
             <td>{{index+i}}</td>
             <td><img src={{s.pokemon_img_url}} /> </td>
             <td style="text-align: center;">{{s.pokemon_name}}</td>
@@ -104,7 +103,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let s of loggedInPokePalWishlist; let i = index">
-
             <td>{{[index+i]}}</td>
             <td><img src={{s.pokemon_img_url}} /> </td>
             <td style="text-align: center;">{{s.pokemon_name}}</td>
@@ -170,6 +168,60 @@
         </div>
 
       </div>
+    </span>
+    <!-- Profile Change -->
+    <span *ngIf="selectedButton === changeProfileMessage">
+      <div class="profile-body" style="margin: 0px auto; text-align: left; ">
+        <div class="container bootstrap snippets bootdey">
+          <h1 class="text-primary">Edit Profile</h1>
+          <hr>
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+              <div class="text-center">
+                <img src={{loggedInPokePal.user_img_url}} class="avatar img-circle img-thumbnail" alt="avatar"
+                  width="200" height="200">
+                <h6>Upload a different photo...</h6>
+
+                <input type="file" class="form-control">
+              </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info">
+
+              <h3>Personal info</h3>
+
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">New User Name:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" placeholder={{loggedInPokePal.user_name}} [(ngModel)]="loggedInPokePal.user_name" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">New Email Address:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="email" placeholder={{loggedInPokePal.user_email}} [(ngModel)]="loggedInPokePal.user_email" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <!-- https://www.codegrepper.com/code-examples/html/If+ngModel+is+used+within+a+form+tag%2C+either+the+name+attribute+must+be+set+or+the+form+control+must+be+defined+as+%27standalone%27+in+ngModelOptions. -->
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">New Password:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="password" [(ngModel)]="loggedInPokePal.user_password" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                  <button style="width: 30%; margin: 10px auto;" class="btn btn-primary" type="submit" (click)="onUpdateUserInfo()">Submit</button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+
     </span>
 
     <span>

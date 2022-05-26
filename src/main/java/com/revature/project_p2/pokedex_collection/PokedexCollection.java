@@ -21,6 +21,7 @@ public class PokedexCollection {
     private Long collection_id;
     @CreationTimestamp
     private Timestamp created_at;
+    @Column(unique = true)
     private String pokemon_name;
     private String pokemon_type_primary;
     private Long pokemon_base_experience;

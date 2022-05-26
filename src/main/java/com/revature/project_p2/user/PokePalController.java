@@ -68,6 +68,11 @@ public class PokePalController {
         return userService.getUserForCommentWishlist(comment_id_wishlist);
     }
 
+    @RequestMapping(value = "{user_id}", method = RequestMethod.PUT)
+    public PokePal updateUserInfo(@PathVariable("user_id") Long user_id, @RequestBody PokePal pokePal) {
+        return userService.updateUserInfo(pokePal, user_id);
+    }
+
 
 
 }

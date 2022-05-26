@@ -15,7 +15,7 @@ import { SessionServicesService } from 'src/app/services/session/session-service
   styleUrls: ['./pokemons.component.css']
 })
 export class PokemonsComponent implements OnInit {
-  index : number = 0;
+  index : number = 1;
   pokemonNameSearch : string = ""
   pokedexArrRendered: Pokedex[] = []
   loggedInPokePalCollection! : PokedexCollection[]

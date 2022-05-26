@@ -90,4 +90,12 @@ public class PokePalService {
         return userRepository.getUserForCommentWishlist(comment_id_wishlist);
     }
 
+    public PokePal updateUserInfo(PokePal pokePal, Long user_id) {
+        PokePal updatedPokepal = userRepository.findById(user_id).get();
+        updatedPokepal.setUser_name(pokePal.getUser_name());
+        updatedPokepal.setUser_password(pokePal.getUser_password());
+        updatedPokepal.setUser_email(pokePal.getUser_email());
+        return userRepository.save(updatedPokepal);
+    }
+
 }

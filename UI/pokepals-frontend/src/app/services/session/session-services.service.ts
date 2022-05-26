@@ -17,19 +17,18 @@ export class SessionServicesService {
   otherPokePalViewWishlist! : PokePal;
   otherPokePalViewCollection! : PokePal;
 
-  dummyPokePal : PokePal = {
-    user_id :  207,
-    user_name: "",
-    user_email : "dummy1@domain.com",
-    user_password : "",
-    user_img_url : "",
-    is_logged_in : true,
-    pokedexCollection: [],
-    pokedexWishlist: [],
-    commentCollections : [],
-    commentWishlist :  []
-
-  }
+  // dummyPokePal : PokePal = {
+  //   user_id :  207,
+  //   user_name: "",
+  //   user_email : "dummy1@domain.com",
+  //   user_password : "",
+  //   user_img_url : "",
+  //   is_logged_in : true,
+  //   pokedexCollection: [],
+  //   pokedexWishlist: [],
+  //   commentCollections : [],
+  //   commentWishlist :  []
+  // }
 
   loggedInPokePal! : PokePal;
   url : string = "http://localhost:9003/api/v1"
@@ -42,7 +41,7 @@ export class SessionServicesService {
 
   getLoggedInUser() {
     console.log(this.loggedInPokePal);
-    return this.dummyPokePal;
+    return this.loggedInPokePal;
   }
 
   getPokedexCollection() {

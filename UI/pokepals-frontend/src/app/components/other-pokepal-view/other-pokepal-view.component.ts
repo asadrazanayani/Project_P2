@@ -13,6 +13,7 @@ import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
   styleUrls: ['./other-pokepal-view.component.css']
 })
 export class OtherPokepalViewComponent implements OnInit {
+  index : number = 1;
   messageText : string = '';
 
   collectionOrWishlist : string = '';
@@ -76,6 +77,7 @@ export class OtherPokepalViewComponent implements OnInit {
 
   viewCollection() {
     if (this.router.url.includes('collection')) {
+      this.index = 1;
       this.collectionOrWishlist = "Other User Collections"
       this.otherPokePalViewCollection = this.sessionService.getOtherPokePalViewCollection();
       console.log(this.otherPokePalViewCollection);
@@ -92,14 +94,15 @@ export class OtherPokepalViewComponent implements OnInit {
               this.pokedexService.getPokePalForCommentCollection(this.comments[i].comment_id).subscribe(val => {
                 this.comments[i].commenter_name = val.user_name;
               })
+              console.log(this.comments);
             }
-            console.log(this.comments);
-          }, 100)
+          }, 1000)
     }
   }
 
   viewWishlist() {
     if (this.router.url.includes('wishlist')) {
+      this.index = 1;
       this.collectionOrWishlist = "Other User Wishlist"
       this.otherPokePalViewWishlist = this.sessionService.getOtherPokePalViewWishlist();
       console.log(this.otherPokePalViewWishlist);
@@ -118,7 +121,7 @@ export class OtherPokepalViewComponent implements OnInit {
               })
             }
             console.log(this.comments);
-          }, 100)
+          }, 1000)
     }
   }
 
@@ -140,7 +143,7 @@ export class OtherPokepalViewComponent implements OnInit {
     });
     setTimeout(() => {
       this.viewCollection();
-    }, 600)
+    }, 1000)
   }
 
   postCommentOnWishlist() {
@@ -161,7 +164,7 @@ export class OtherPokepalViewComponent implements OnInit {
     });
     setTimeout(() => {
       this.viewWishlist();
-    }, 600)
+    }, 1000)
       
   }
 
