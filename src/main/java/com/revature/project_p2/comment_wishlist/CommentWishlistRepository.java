@@ -20,6 +20,6 @@ import java.util.List;
 @Repository
 public interface CommentWishlistRepository extends JpaRepository<CommentWishlist, Long> {
 
-    @Query(value = "Select * from comment_wishlist where user_id_wishlist = ?1 ORDER BY Created_at", nativeQuery = true)
+    @Query(value = "Select * from comment_wishlist where user_id_wishlist = ?1 ORDER BY created_at", nativeQuery = true)
     List<CommentWishlist> getCommentsForWishlist(Long user_id_wishlist);
 }

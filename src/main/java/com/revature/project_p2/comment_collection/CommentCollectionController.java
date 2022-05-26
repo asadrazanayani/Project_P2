@@ -15,12 +15,13 @@ public class CommentCollectionController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public CommentCollection add_comment(@RequestBody CommentCollection commentCollection) {
+
         return commentCollectionService.add_comment(commentCollection);
     }
 
     @RequestMapping(value = "/{user_id}", method = RequestMethod.GET)
     public List<CommentCollection> getCommentsForCollection(@PathVariable("user_id") Long user_id) {
-        return commentCollectionService.getCommentsForCollection(user_id);
+        return  commentCollectionService.getCommentsForCollection(user_id);
     }
 
 

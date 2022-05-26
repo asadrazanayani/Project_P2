@@ -111,26 +111,24 @@ export class PostLoginHomeComponent implements OnInit {
     this.selectedButton = this.viewCollectionMessage;
     console.log(this.loggedInPokePal);
     this.pokedexService.getUserPokedexCollection(this.loggedInPokePal.user_id).subscribe(val => {
-      console.log(val);
+      // console.log(val);
       this.loggedInPokePalCollection = val;
       // console.log(this.loggedInPokePalCollection)
     })
     this.sessionService.postLoggedInPokePalCollection(this.loggedInPokePalCollection);
-
     // get loggedInPokePal comments.
     this.pokedexService.getAllLoggedInPokePalCollectionComments(this.loggedInPokePal.user_id).subscribe(response => {
       this.comments = [];
       this.comments = response;
+      console.log(this.comments);
     });
     setTimeout(() => {
-      this.comments.forEach(comment => {
-        this.pokedexService.getPokePalForCommentCollection(comment.comment_id).subscribe(pokepal => {
-          comment.commenter_name = pokepal.user_name
-          this.commentsName.push(comment);
-          console.log(this.commentsName);
-        }) 
-      });
-    }, 1000);
+     for (let i = 0; i < this.comments.length; i++) {
+       this.pokedexService.getPokePalForCommentCollection(this.comments[i].comment_id).subscribe(val => {
+        this.comments[i].commenter_name = val.user_name;
+       });
+     }
+    }, 100)
 
   }
   
@@ -147,24 +145,17 @@ export class PostLoginHomeComponent implements OnInit {
     this.sessionService.postLoggedInPokePalWishlist(this.loggedInPokePalWishlist);
     // get loggedIn PokePal Collection Comments
     this.pokedexService.getAllLoggedInPokePalWishlistComments(this.loggedInPokePal.user_id).subscribe(response => {
-      console.log(response[0].comment_id_wishlist)
       this.comments = [];
       this.comments = response;
-      console.log(this.comments[0].comment_id_wishlist);
-      console.log(this.commentsName.length);
-
+      console.log(this.comments);
     });
     setTimeout(() => {
-      this.comments.forEach(comment => {
-        console.log(comment);
-        this.pokedexService.getPokePalForCommentWishlist(comment.comment_id_wishlist).subscribe(pokepal => {
-          console.log(pokepal)
-          comment.commenter_name = pokepal.user_name
-          this.commentsName.push(comment);
-          console.log(this.commentsName);
-        }) 
-      });
-    }, 1000);
+      for (let i = 0; i < this.comments.length; i++) {
+        this.pokedexService.getPokePalForCommentWishlist(this.comments[i].comment_id_wishlist).subscribe(val => {
+         this.comments[i].commenter_name = val.user_name;
+        });
+      }
+     }, 100)
   }
   
   selectChangeProfile() {

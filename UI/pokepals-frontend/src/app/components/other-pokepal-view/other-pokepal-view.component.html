@@ -37,7 +37,7 @@
     
           </div>
           <ul class="posts">
-            <div *ngFor="let s of commentsName; let i = index">
+            <div *ngFor="let s of comments; let i = index">
               <li>
                 <H5>{{s.commenter_name}}</H5>{{s.contents}}
               </li>
@@ -74,8 +74,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let s of otherPokePalViewWishlist_Wishlist; let i = index">
-
-          <td>0</td>
+          <td>asdasd</td>
           <td><img src={{s.pokemon_img_url}} /> </td>
           <td style="text-align: center;">{{s.pokemon_name}}</td>
           <td>{{s.pokemon_type_primary}}</td>
@@ -92,11 +91,11 @@
         
               </div>
               <ul class="posts">
-                <div *ngFor="let s of commentsName; let i = index">
-                    <li>
-                      <H5>{{s.commenter_name}}</H5>{{s.contents}}
-                    </li>
-                  </div>
+                <div *ngFor="let s of comments; let i = index">
+                  <li>
+                    <H5>{{s.commenter_name}}</H5>{{s.contents}}
+                  </li>
+                </div>
               </ul>
               <div class="comment-container">
                 <span>
