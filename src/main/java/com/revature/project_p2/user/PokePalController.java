@@ -58,9 +58,14 @@ public class PokePalController {
         return userService.getUserInfo(user_id);
     }
 
-    @RequestMapping(value = "commentInfo/{comment_id}", method = RequestMethod.GET)
-    public PokePal getUserForComment(@PathVariable("comment_id") Long comment_id) {
-        return userService.getUserForComment(comment_id);
+    @RequestMapping(value = "commentInfo-collection/{comment_id}", method = RequestMethod.GET)
+    public PokePal getUserForCommentCollection(@PathVariable("comment_id") Long comment_id) {
+        return userService.getUserForCommentCollection(comment_id);
+    }
+
+    @RequestMapping(value = "commentInfo-wishlist/{comment_id_wishlist}", method = RequestMethod.GET)
+    public PokePal getUserForCommentWishlist(@PathVariable("comment_id_wishlist") Long comment_id_wishlist) {
+        return userService.getUserForCommentWishlist(comment_id_wishlist);
     }
 
 

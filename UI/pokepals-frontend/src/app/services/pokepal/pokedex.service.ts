@@ -12,6 +12,7 @@ export class PokedexService {
 
 
 
+
   pokePal! : PokePal;
   loginUser! : Login;
   url : string = "http://localhost:9003/api/v1"
@@ -49,6 +50,22 @@ export class PokedexService {
   addPokedexToWishlist(pokedex : Pokedex) {
     return this.http.post<Pokedex>(this.url + `/pokedex-wishlist`,pokedex)
   }
+
+  getAllLoggedInPokePalWishlistComments(user_id : number) {
+    return this.http.get<any[]>(this.url + `/comments-wishlist/${user_id}`);
+  }
+  getAllLoggedInPokePalCollectionComments(user_id : number) {
+    return this.http.get<any[]>(this.url + `/comments/${user_id}`);
+  }
+
+  getPokePalForCommentCollection(comment_id: number) {
+    return this.http.get<PokePal>(this.url+`/user/commentInfo-collection/${comment_id}`)
+  }
+
+  getPokePalForCommentWishlist(comment_id: number) {
+    return this.http.get<PokePal>(this.url+`/user/commentInfo-wishlist/${comment_id}`)
+  }
+ 
  
 
 }

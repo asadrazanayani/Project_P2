@@ -82,7 +82,12 @@ public class PokePalService {
         return userRepository.findById(user_id).get();
     }
 
-    public PokePal getUserForComment(Long comment_id) {
-        return userRepository.getUserForComment(comment_id);
+    public PokePal getUserForCommentCollection(Long comment_id) {
+        return userRepository.getUserForCommentCollection(comment_id);
     }
+
+    public PokePal getUserForCommentWishlist(Long comment_id_wishlist) {
+        return userRepository.getUserForCommentWishlist(comment_id_wishlist);
+    }
+
 }

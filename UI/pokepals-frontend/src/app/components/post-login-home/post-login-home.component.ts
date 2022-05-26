@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import axios from 'axios';
 import { PokedexCollection } from 'src/app/Entity/PokedexCollection';
 import { PokedexWishlist } from 'src/app/Entity/PokedexWishlist';
+import { Comment } from 'src/app/Entity/Comment';
 import { PokePal } from 'src/app/Entity/PokePal';
 import { PokedexService } from 'src/app/services/pokepal/pokedex.service';
 import { SessionServicesService } from 'src/app/services/session/session-services.service';
@@ -16,6 +17,8 @@ export class PostLoginHomeComponent implements OnInit {
   loggedInPokePal! : PokePal;
   loggedInPokePalCollection : any[] = [];
   loggedInPokePalWishlist : any[] = [];
+  comments : Comment[] = [];
+  commentsName : Comment[] = []
 
   //TODO: Remove this. only for development
   dummyPokePal! : PokePal;
@@ -34,6 +37,7 @@ export class PostLoginHomeComponent implements OnInit {
   selectedButton : string = "";
 
   constructor(private pokedexService : PokedexService, private sessionService : SessionServicesService) {
+    
 
    }
    // get the loggedInPokePal after login/signup
@@ -94,27 +98,64 @@ export class PostLoginHomeComponent implements OnInit {
     }
   
   selectViewCollection() {
+    this.commentsName = [];
+    this.comments = [];
     this.selectedButton = this.viewCollectionMessage;
     console.log(this.loggedInPokePal);
     this.pokedexService.getUserPokedexCollection(this.loggedInPokePal.user_id).subscribe(val => {
-      // console.log(val);
+      console.log(val);
       this.loggedInPokePalCollection = val;
-      console.log(this.loggedInPokePalCollection)
+      // console.log(this.loggedInPokePalCollection)
     })
-    this.sessionService.postLoggedInPokePalCollection(this.loggedInPokePalCollection)
+    this.sessionService.postLoggedInPokePalCollection(this.loggedInPokePalCollection);
 
+    // get loggedInPokePal comments.
+    this.pokedexService.getAllLoggedInPokePalCollectionComments(this.loggedInPokePal.user_id).subscribe(response => {
+      this.comments = [];
+      this.comments = response;
+    });
+    setTimeout(() => {
+      this.comments.forEach(comment => {
+        this.pokedexService.getPokePalForCommentCollection(comment.comment_id).subscribe(pokepal => {
+          comment.commenter_name = pokepal.user_name
+          this.commentsName.push(comment);
+          console.log(this.commentsName);
+        }) 
+      });
+    }, 1000);
 
   }
   
   selectViewWishist() {
+    this.commentsName = [];
+    this.comments = [];
     this.selectedButton = this.viewWishlistMessage;
     console.log(this.loggedInPokePal);
      this.pokedexService.getUserPokedexWishlist(this.loggedInPokePal.user_id).subscribe(val => {
       // console.log(val);
       this.loggedInPokePalWishlist = val;
-      console.log(this.loggedInPokePalWishlist)
+      // console.log(this.loggedInPokePalWishlist)
     })
     this.sessionService.postLoggedInPokePalWishlist(this.loggedInPokePalWishlist);
+    // get loggedIn PokePal Collection Comments
+    this.pokedexService.getAllLoggedInPokePalWishlistComments(this.loggedInPokePal.user_id).subscribe(response => {
+      console.log(response[0].comment_id_wishlist)
+      this.comments = [];
+      this.comments = response;
+      console.log(this.comments[0].comment_id_wishlist);
+      console.log(this.commentsName.length);
+    });
+    setTimeout(() => {
+      this.comments.forEach(comment => {
+        console.log(comment);
+        this.pokedexService.getPokePalForCommentWishlist(comment.comment_id_wishlist).subscribe(pokepal => {
+          console.log(pokepal)
+          comment.commenter_name = pokepal.user_name
+          this.commentsName.push(comment);
+          console.log(this.commentsName);
+        }) 
+      });
+    }, 1000);
   }
   
   selectChangeProfile() {

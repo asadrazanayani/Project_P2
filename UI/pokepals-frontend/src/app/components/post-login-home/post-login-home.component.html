@@ -38,7 +38,7 @@
   <tbody>
     <tr *ngFor="let s of loggedInPokePalCollection; let i = index">
       
-        <td>{{[index+i]}}</td>
+        <td>{{index+i}}</td>
         <td><img src = {{s.pokemon_img_url}} /> </td>
         <td style="text-align: center;">{{s.pokemon_name}}</td>
         <td>{{s.pokemon_type_primary}}</td>
@@ -46,6 +46,30 @@
         <td>{{s.pokemon_special_move}}</td>
       </tbody>
     </table>
+
+    <!-- Collection Comments -->
+    <h3 class="comment-heading">Add A Comment Below</h3>
+
+<!-- <link rel="stylesheet" href="commenttemp.css"> -->
+<div class="comment-body">
+</div>
+<ul class="posts">
+    <div *ngFor="let s of commentsName; let i = index">
+        <li><H5>{{s.commenter_name}}</H5>{{s.contents}}</li>
+    </div>
+</ul>
+<div class="comment-container">
+    <form>
+      <div class="form-group">
+        <textarea style="width: 100%; height: 10%;" class="form-control status-box" rows="3" placeholder="Enter your comment here..."></textarea>
+      </div>
+    </form>
+    <div class="button-group pull-right">
+      <p class="counter">250</p>
+      <a class="btn btn-primary">Post</a>
+</div>
+</div>
+
 
 <!-- End of the collection -->
            
@@ -81,13 +105,34 @@
                     <td>{{s.pokemon_special_move}}</td>
                   </tbody>
                 </table>
-            
-            
+
+                
+    <!-- Wishlist Comments -->
+    <h3 class="comment-heading">Add A Comment Below</h3>
+
+    <!-- <link rel="stylesheet" href="commenttemp.css"> -->
+    <div class="comment-body">
+
+        </div>
+        <ul class="posts">
+            <div *ngFor="let s of commentsName; let i = index">
+                <li><H5>{{s.commenter_name}}</H5>{{s.contents}}</li>
+            </div>
+        </ul>
+        <div class="comment-container">
+            <form>
+              <div class="form-group">
+                <textarea style="width: 100%; height: 10%;" class="form-control status-box" rows="3" placeholder="Enter your comment here..."></textarea>
+              </div>
+            </form>
+            <div class="button-group pull-right">
+              <p class="counter">250</p>
+              <a class="btn btn-primary">Post</a>
+      </div>
+    </div>
+
 <!-- End of the Wishlist -->
         </span>
-
-
-
 
         <span *ngIf="selectedButton === otherPokepalMessage">
             <h3 style="text-align: center; margin-top: 50px;
@@ -108,6 +153,10 @@
                 </div>
 
             </div>
+        </span>
+
+        <span>
+            
         </span>
         
 
