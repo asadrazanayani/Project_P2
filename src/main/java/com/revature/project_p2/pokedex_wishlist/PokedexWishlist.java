@@ -12,16 +12,21 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "pokedex_wishlist",
+        uniqueConstraints={@UniqueConstraint(columnNames ={"pokemon_name","user_id"})})
+// https://stackoverflow.com/questions/3126769/uniqueconstraint-annotation-in-java/50227050#50227050
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+//@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"pokemon_name", "user_id"})})
+
 public class PokedexWishlist {
     @Id
     @GeneratedValue
     private Long wishlist_id;
     @CreationTimestamp
     private Timestamp created_at;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String pokemon_name;
     private String pokemon_type_primary;
     private Long pokemon_base_experience;

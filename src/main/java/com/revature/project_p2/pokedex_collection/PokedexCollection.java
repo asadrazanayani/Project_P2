@@ -12,16 +12,19 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "pokedex_collection",
+        uniqueConstraints={@UniqueConstraint(columnNames ={"pokemon_name","user_id"})})
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+//@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"pokemon_name", "user_id"})})
 public class PokedexCollection {
     @Id
     @GeneratedValue
     private Long collection_id;
     @CreationTimestamp
     private Timestamp created_at;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String pokemon_name;
     private String pokemon_type_primary;
     private Long pokemon_base_experience;
