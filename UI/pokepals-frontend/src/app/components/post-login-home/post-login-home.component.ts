@@ -1,7 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-// import axios from 'axios';
-// import { PokedexCollection } from 'src/app/Entity/PokedexCollection';
-// import { PokedexWishlist } from 'src/app/Entity/PokedexWishlist';
 import { Comment } from 'src/app/Entity/Comment';
 import { PokePal } from 'src/app/Entity/PokePal';
 import { PokedexService } from 'src/app/services/pokepal/pokedex.service';
@@ -21,9 +18,6 @@ export class PostLoginHomeComponent implements OnInit {
   comments : Comment[] = [];
   commentsName : Comment[] = []
 
-  //TODO: Remove this. only for development
-  dummyPokePal! : PokePal;
-  //
 
   //for otherpokepals
   OtherPokePals = new Set<PokePal>();

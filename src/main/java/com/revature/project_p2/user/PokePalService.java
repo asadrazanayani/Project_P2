@@ -34,7 +34,7 @@ public class PokePalService {
         return userRepository.findAll();
     }
 
-    public void uploadUserProfileImg(Long user_id, MultipartFile file) {
+    public boolean uploadUserProfileImg(Long user_id, MultipartFile file) {
         // 1. Check of the image is not image
         if (file.isEmpty()) {
             throw new IllegalStateException("Cannot upload Empty File" + file.getSize());
@@ -62,6 +62,7 @@ public class PokePalService {
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
+        return true;
     }
 
     public byte[] downloadProfileImage(Long user_id) {
@@ -97,5 +98,7 @@ public class PokePalService {
         updatedPokepal.setUser_email(pokePal.getUser_email());
         return userRepository.save(updatedPokepal);
     }
+
+
 
 }

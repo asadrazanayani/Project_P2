@@ -36,11 +36,11 @@ public class CommentCollection {
     private String contents;
 
 
-//    public CommentCollection(PokePal commenter, PokePal pokePal, String content) {
-//        this.commenter = commenter;
-//        this.pokePal = pokePal;
-//        this.contents = content;
-//    }
+    public CommentCollection(PokePal commenter, PokePal pokePal, String content) {
+        this.commenter = commenter;
+        this.pokePal = pokePal;
+        this.contents = content;
+    }
 //
 //    public CommentCollection(String contents) {
 //        this.contents = contents;
