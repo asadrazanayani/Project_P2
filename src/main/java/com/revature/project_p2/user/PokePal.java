@@ -38,7 +38,6 @@ public class PokePal {
     private Timestamp updated_at;
     private Boolean is_logged_in = false;
 
-
     @JsonManagedReference
     @OneToMany(mappedBy = "pokePal", cascade = CascadeType.ALL)
     private List<PokedexCollection> pokedexCollection;

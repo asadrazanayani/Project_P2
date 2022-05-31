@@ -73,8 +73,7 @@ public class PokePalService {
     }
 
     public PokePal logout(PokePal pokePal) {
-        List<PokePal> users = userRepository.findUserForLogin(pokePal.getUser_email(), pokePal.getUser_password());
-        PokePal user = users.get(0);
+        PokePal user = userRepository.findById(pokePal.getUser_id()).get();
         user.setIs_logged_in(false);
         return userRepository.save(user);
     }

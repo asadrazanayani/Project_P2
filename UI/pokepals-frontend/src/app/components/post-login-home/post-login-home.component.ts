@@ -169,6 +169,9 @@ export class PostLoginHomeComponent implements OnInit {
 
   logout() {
     this.selectedButton = this.logoutMessage;
+    this.pokedexService.logout(this.loggedInPokePal).subscribe(val => {
+      console.log(val); 
+    })
     console.log(this.selectedButton);
     this.route.navigate([''])
   }
