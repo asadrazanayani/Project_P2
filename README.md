@@ -1,51 +1,85 @@
-# Project_P2
-Pokemon_Pals
+# Project_P2 - PokePals
 
+## Description
+Pokemon is probably is the most famous anime franshise accross the globe. Worth over USD $99 billion. The idea with this was to create a social network whereby pokedex collectors can show-off their collection to the world. Our social network allows users to add pokemon to their collection and get comments from other pokemon users. Furthermore, the users can also add pokemons to their wishlist.
 
 ## User Stories for 
-### Original Pokémon Pals
+### Pokémon Pals
 1.	A new user can register.
-2.	A new user can sign in.
-3.	A User can upload an image
-4.	A user can see all the users.
-5.	A new user can upload the image of Pokémon card on the network.
-6.	A new user can show-off all the Pokémon cards  out 150.
-7.	A user can mark their cards for either for sale or willing to trade with another Pokémon.
-8.	The same user can show interest in the specific Pokémon card they want to buy and the amount of money they are willing to pay.
-9.	The same user can also sell some of their Pokémon card collection.
-10.	Users can trade cards between them.
-11.	User can also buy/sell cards.
-12.	A user can see other users collection.
-13.	A ranking system, where the users with the most Pokémon cards are ranked at the top
-14.	A user can be approached by another user and ask them if they are willing to let go of one of their Pokémon card for either money or another Pokémon card.
-15.	A user can filter the search to show users with only a specific Pokémon card.
-16.	A bidding system going.
-17.	User: View all successful trades. User: View all successful transactions. 
-18.	Get the table of most popular Pokemon card
-19.	A user can msg another user.
+2.  A new user can also upload their profile image
+2.	A new user can login.
+3.  A user can see its own pokemon collection and comments on those collection.
+4.  A user can see its own pokemon wishlist and comments on those wishlist.
+5.  A user can see all the possible pokemons available from all the generations.
+6.  A user can also search the pokemon by name.
+7.  A user can add pokemon to their collection and wishlist.
+8.  The pokemon added in the collection or in the wishlist must be unique. That is a user cannot add more than one pokemon of the same name in their collection or wishlist.
+9. A user can make a comment on their own collection or wishlist.
+10. A user can see all other pokepals on our network.
+11. A user can view a specific pokepal's collections and all the associated comments made by other pokepal.
+12. A user can view a specific pokepal's wishlist and all the associated comments made by other pokepal.
+13. A user can make a comment on other pokepal's collection. The comment will be added and changes must be reflected in realtime. 
+14. A user can make a comment on other pokepal's wishlist. The comment will be added and changes must be reflected in realtime.
+15. A user can update profile details. including password.
+16. A user can also update its profile picture as well. 
+17. A user can logout. 
 
+## Technologies/Frameworks Used
+### Front-end
+- Angular
+- Bootstrap (for styling only)
 
-## useful Info
-### Store Image on Amazon S3
-[Upload Images on AmazonS3](https://medium.com/linkit-intecs/upload-and-view-files-in-amazon-s3-using-angular-spring-boot-325b118e7188)
+### Back-end
+- Java
+- Spring boot
+    - Web
+    - Data (JPA)
+- Lombok
+- AWS RDS (postgres)
+- AWS s3 buckets to store images
+- H2 to test back-end service layer
 
+### How to use this repo?
+## Front-end
+- The front-end has been seperated in the `UI` folder. 
+- Simply install the necessary dependencies in your local environment and `ng serve` to fire up the angular app.
 
-## Work Division
-1. Kyle --> Comments
-2. Ryan --> Users
-3. MD --> Upvotes
-4. Asad --> pokedex
+## Back-end
+- The POM.xml (project) is on the root directory.
+- You must make some adjustments to `application.properties`. Simply change the aws credentials to access 
 
-## To be decided
-Pokedex_collection
-Pokdex_wishlist
+```properties
+server.port=9003 
+<!-- User can change the port, default is 8080 -->
 
-## To be researched
-- Add user image to S3
-- URL mapping using parameters
+spring.servlet.multipart.max-file-size=10MB
 
-## Branch Naming Convension
-asad_branch
-md_branch
-ryan_branch
-kyle_branch
+#PSQL CONfig
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+
+# Everytime we change then the table will be updated, none would not run and .sql files
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.hibernate.show.sql=true
+
+# this is our connection to the databse
+spring.datasource.url=jdbc:postgresql://**<your AWS RDS database>**
+spring.datasource.username=**<your AWS RDS database username, it is mostly postgres> **
+spring.datasource.password=**<your AWS RDS database password>**
+spring.datasource.initialization-mode=never
+
+logging.level.org.springframework.context=DEBUG
+``` 
+- You must also make some adjustments to `AmazonConfig` in utility class
+```java
+@Configuration
+public class AmazonConfig {
+
+    @Bean //spring instantiates this at runtime.
+    public AmazonS3 s3() {
+        AWSCredentials awsCredentials = new BasicAWSCredentials("<insert your access ID>", "<insert your secret key>");
+        return AmazonS3ClientBuilder.standard().withRegion("<insert-aws-region>") // like "us-east-1"
+                .withCredentials(new AWSStaticCredentialsProvider(awsCredentials)).build();
+    }
+}
+```
+- For best user experience, the dimensions of the user images should not exceed 300px by 300px
