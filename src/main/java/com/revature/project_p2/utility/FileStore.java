@@ -18,12 +18,8 @@ import java.util.Optional;
 @Service
 public class FileStore {
 
-    private final AmazonS3 s3;
-
     @Autowired
-    public FileStore(AmazonS3 s3) {
-        this.s3 = s3;
-    }
+    private AmazonS3 s3;
 
     // Save method // path is the bucket name
     public void save(String path, String fileName, Optional<Map<String, String>> optionalMetaData, InputStream inputStream) {
@@ -42,11 +38,12 @@ public class FileStore {
 
     public byte[] download(String path, String key) {
         try {
+            System.out.println("path: " + path);
+            System.out.println("key: " + key);
             S3Object object = s3.getObject(path, key);
             return IOUtils.toByteArray(object.getObjectContent());
         } catch (AmazonServiceException | IOException e) {
             throw new IllegalStateException("Failed To Download file To S3", e);
         }
-
     }
 }

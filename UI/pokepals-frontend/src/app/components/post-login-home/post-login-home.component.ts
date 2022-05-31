@@ -4,6 +4,7 @@ import { PokePal } from 'src/app/Entity/PokePal';
 import { PokedexService } from 'src/app/services/pokepal/pokedex.service';
 import { SessionServicesService } from 'src/app/services/session/session-services.service';
 import { Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-post-login-home',
@@ -237,6 +238,39 @@ export class PostLoginHomeComponent implements OnInit {
     });
     this.route.navigate([''])
   }
+
+  // uploading user image
+  fileName : string = "";
+  fileUploadMessage : string = "";
+  onProfilePicChange(event : any) { 
+    const file:File = event.target.files[0];
+
+    if (file) {
+        this.fileName = file.name;
+        const formData = new FormData();
+        formData.append("file", file);
+        // posting via axios
+        axios.post(`http://localhost:9003/api/v1/user/${this.loggedInPokePal.user_id}/image/upload`, formData, {
+          headers : {
+            "Content-Types" : "multipart/form-data"
+            // for images, content-type will be multipart
+          }
+        }).then(() => {
+          this.fileUploadMessage = "Uploaded Successfully";
+          console.log(this.fileUploadMessage);
+          
+          this.route.navigate([''])
+          setTimeout(() => {
+            window.location.reload();
+          }, 250)
+        }).catch(err => {
+          console.log("Error");
+        })
+        };
+        //https://blog.angular-university.io/angular-file-upload/
+        
+  }
+
 
 }
 

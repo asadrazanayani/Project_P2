@@ -13,8 +13,7 @@ public class AmazonConfig {
 
     @Bean //spring instantiates this at runtime.
     public AmazonS3 s3() {
-        AWSCredentials awsCredentials = new BasicAWSCredentials("AKIAZHEHINRK3NTFKAUW",
-                "S2Dzr2QiVk83KBeJdA1affJRjO3xgxKebCvmMSVg");
+        AWSCredentials awsCredentials = new BasicAWSCredentials("", "");
         return AmazonS3ClientBuilder.standard().withRegion("us-east-1")
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials)).build();
     }

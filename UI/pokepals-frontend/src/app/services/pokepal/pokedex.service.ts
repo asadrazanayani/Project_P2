@@ -73,7 +73,7 @@ export class PokedexService {
   }
 
   updateLoggedInUserInfo(loggedInPokePal: PokePal) {
-    return this.http.put(this.url + `/user/${loggedInPokePal.user_id}` , loggedInPokePal)
+    return this.http.put<PokePal>(this.url + `/user/${loggedInPokePal.user_id}` , loggedInPokePal)
   }
 
  

@@ -62,18 +62,6 @@ public class PokePal {
     @OneToMany(mappedBy = "pokePal", cascade = CascadeType.ALL)
     private List<CommentWishlist> commenterWishlists;
 
-
-
-
-
-//    @OneToMany(mappedBy = "user")
-//    private List<CommentCollection> commentCollection;
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<CommentWishlist> commentWishlists;
-
-
-
     public PokePal(String user_email, String user_password) {
         this.user_email = user_email;
         this.user_password = user_password;
