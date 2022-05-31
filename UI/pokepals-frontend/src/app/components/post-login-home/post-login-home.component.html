@@ -1,0 +1,239 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg" style="background-color: #AFEEEE;">
+    <div class="container-fluid">
+      <a type="button" class="btn btn-outline-primary" routerLink="/pokemons">See All Pokemons</a>
+      <button type="button" class="btn btn-outline-secondary"
+        (click)="selectOtherPokePals()">{{otherPokepalMessage}}</button>
+      <button type="button" class="btn btn-outline-primary"
+        (click)="selectViewCollection()">{{viewCollectionMessage}}</button>
+      <button type="button" class="btn btn-outline-success"
+        (click)="selectViewWishist()">{{viewWishlistMessage}}</button>
+      <a type="button" class="btn btn-outline-dark" (click)="selectChangeProfile()">Change Profile Details</a>
+      <span *ngIf="!loggedInPokePal">
+        <button type="button" class="btn btn-outline-info" routerLink="">Login</button>
+      </span>
+      <span *ngIf="loggedInPokePal">
+        <a type="button" class="btn btn-outline-danger" (click)="logout()">Logout</a>
+      </span>
+    </div>
+  </nav>
+  <div class="container">
+    <span *ngIf="selectedButton === viewCollectionMessage">
+      <h3 style="text-align: center; margin-top: 50px;
+            margin-bottom: 50px;">Your Pokedex Collection</h3>
+      <span *ngIf="!loggedInPokePalCollection.length" style="text-align: center;">
+        <h4>You do not have any pokedex in your collection. Add Them Now</h4>
+        <a type="button" class="btn btn-outline-primary" routerLink="/pokemons">See All Pokemons</a>
+      </span>
+      <!-- Display the table of pokedex collection here. Property name loggedInPokePalCollection -->
+
+      <table class="table table-striped table-hover" style="justify-content: center; text-align: center;">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">img</th>
+            <th scope="col">Name</th>
+            <th scope="col">Primary Type</th>
+            <th scope="col">Base Experience</th>
+            <th scope="col">Special Move</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of loggedInPokePalCollection; let i = index">
+            <td>{{index+i}}</td>
+            <td><img src={{s.pokemon_img_url}} /> </td>
+            <td style="text-align: center;">{{s.pokemon_name}}</td>
+            <td>{{s.pokemon_type_primary}}</td>
+            <td>{{s.pokemon_base_experience}}</td>
+            <td>{{s.pokemon_special_move}}</td>
+        </tbody>
+      </table>
+
+      <!-- Collection Comments -->
+      <h3 class="comment-heading">Add A Comment Below</h3>
+
+      <!-- <link rel="stylesheet" href="commenttemp.css"> -->
+      <div class="comment-body">
+      </div>
+      <ul class="posts">
+        <div *ngFor="let s of comments; let i = index">
+          <li>
+            <H5>{{s.commenter_name}}</H5>{{s.contents}}
+          </li>
+        </div>
+      </ul>
+      <div class="comment-container">
+        <span>
+          <div class="form-group">
+            <textarea style="width: 100%; height: 10%;" class="form-control status-box" rows="3"
+              placeholder="Enter your comment here..." [(ngModel)]="messageText"></textarea>
+          </div>
+        </span>
+        <div class="button-group pull-right">
+          <p class="counter">{{250 - messageText.length}}</p>
+          <a class="btn btn-primary" (click)="postCommentOnCollection()">Post</a>
+        </div>
+      </div>
+
+
+      <!-- End of the collection -->
+
+    </span>
+
+    <span *ngIf="selectedButton === viewWishlistMessage">
+      <h3 style="text-align: center; margin-top: 50px;
+            margin-bottom: 50px;">Your Pokedex Wishlist</h3>
+      <span *ngIf="!loggedInPokePalCollection.length" style="text-align: center;">
+        <h4>You do not have any pokedex in your collection. Add Them Now</h4>
+        <a type="button" class="btn btn-outline-primary" routerLink="/pokemons">See All Pokemons</a>
+      </span>
+
+      <!-- Display the table of pokedex collection here. Property name loggedInPokePalCollection -->
+
+      <table class="table table-striped table-hover" style="justify-content: center; text-align: center;">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">img</th>
+            <th scope="col">Name</th>
+            <th scope="col">Primary Type</th>
+            <th scope="col">Base Experience</th>
+            <th scope="col">Special Move</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of loggedInPokePalWishlist; let i = index">
+            <td>{{[index+i]}}</td>
+            <td><img src={{s.pokemon_img_url}} /> </td>
+            <td style="text-align: center;">{{s.pokemon_name}}</td>
+            <td>{{s.pokemon_type_primary}}</td>
+            <td>{{s.pokemon_base_experience}}</td>
+            <td>{{s.pokemon_special_move}}</td>
+        </tbody>
+      </table>
+
+
+      <!-- Wishlist Comments -->
+      <h3 class="comment-heading">Add A Comment Below</h3>
+
+      <!-- <link rel="stylesheet" href="commenttemp.css"> -->
+      <div class="comment-body">
+
+      </div>
+      <ul class="posts">
+        <div *ngFor="let s of comments; let i = index">
+          <li>
+            <H5>{{s.commenter_name}}</H5>{{s.contents}}
+          </li>
+        </div>
+      </ul>
+      <div class="comment-container">
+        <span>
+          <div class="form-group">
+            <textarea style="width: 100%; height: 50%;" class="form-control status-box" rows="3"
+              placeholder="Enter your comment here..." [(ngModel)]="messageText"></textarea>
+          </div>
+        </span>
+        <div class="button-group pull-right">
+          <p class="counter">{{250 - messageText.length}}</p>
+          <a class="btn btn-primary" (click)="postCommentOnWishlist()">Post</a>
+        </div>
+      </div>
+
+      <!-- End of the Wishlist -->
+    </span>
+
+    <!-- Other PokePals -->
+
+    <span *ngIf="selectedButton === otherPokepalMessage">
+      <h3 style="text-align: center; margin-top: 50px;
+            margin-bottom: 50px;">Other Pokedex Users</h3>
+      <div class="users-grid" *ngFor="let s of OtherPokePals; let i = index">
+        <div class="box">
+          <h6>{{s.user_name}}</h6>
+          <img class="rounded mx-auto d-block" src="{{s.user_img_url}}">
+          Size of Pokedex Collection : {{s.pokedexCollection.length}}<br>
+          Size of Pokedex Wishlist : {{s.pokedexWishlist.length}}<br>
+          Number of Comments Made on Collection : {{s.commentCollections.length}}<br>
+          Number of Comments Made on Wishlist : {{s.commentWishlist.length}}<br>
+          <span style="display: inline;">
+            <a routerLink="/other-view-collection" (click)="otherUserCollection(s)"><button type="button"
+                class="btn btn-outline-primary">View User Pokedex Collection</button></a>
+            <!--  -->
+            <a routerLink="/other-view-wishlist" (click)="otherUserWishlist(s)">
+              <button type="button" class="btn btn-outline-success">View User Pokedex Wishlist</button></a>
+            <!--  -->
+          </span>
+          <br>
+        </div>
+
+      </div>
+    </span>
+    <!-- Profile Change -->
+    <span *ngIf="selectedButton === changeProfileMessage">
+      <div class="profile-body" style="margin: 0px auto; text-align: left; ">
+        <div class="container bootstrap snippets bootdey">
+          <h1 class="text-primary">Edit Profile</h1>
+          <hr>
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+              <div class="text-center">
+                <img src={{loggedInPokePal.user_img_url}} class="avatar img-circle img-thumbnail" alt="avatar"
+                  width="200" height="200">
+                <h6>Upload a different photo...</h6>
+
+                <input type="file" class="form-control" (change)="onProfilePicChange($event)">
+              </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info">
+
+              <h3>Personal info</h3>
+
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">New User Name:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" placeholder={{loggedInPokePal.user_name}} [(ngModel)]="loggedInPokePal.user_name" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">New Email Address:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="email" placeholder={{loggedInPokePal.user_email}} [(ngModel)]="loggedInPokePal.user_email" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <!-- https://www.codegrepper.com/code-examples/html/If+ngModel+is+used+within+a+form+tag%2C+either+the+name+attribute+must+be+set+or+the+form+control+must+be+defined+as+%27standalone%27+in+ngModelOptions. -->
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">New Password:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="password" [(ngModel)]="loggedInPokePal.user_password" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                  <button style="width: 30%; margin: 10px auto;" class="btn btn-primary" type="submit" (click)="onUpdateUserInfo()">Submit</button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+
+    </span>
+
+    <span>
+
+    </span>
+
+
+
+
+
+
+
+  </div>
+
+</div>
