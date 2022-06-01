@@ -82,7 +82,7 @@ public class AmazonConfig {
     }
 }
 ```
-- You must also changes in the `BucketName` class and change `PROFILE_IMAGE` and insert your s3 bucket name
+- You must also make some changes in the `BucketName` class and change `PROFILE_IMAGE` and insert your s3 bucket name
 ```Java
 package com.revature.project_p2.utility;
 
