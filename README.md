@@ -39,12 +39,12 @@ Pokemon is probably is the most famous anime franshise accross the globe. Worth 
 - AWS s3 buckets to store images
 - H2 to test back-end service layer
 
-### How to use this repo?
-## Front-end
+## How to use this repo?
+### Front-end
 - The front-end has been seperated in the `UI` folder. 
 - Simply install the necessary dependencies in your local environment and `ng serve` to fire up the angular app.
 
-## Back-end
+### Back-end
 - The POM.xml (project) is on the root directory.
 - You must make some adjustments to `application.properties`. Simply change the aws credentials to access 
 
