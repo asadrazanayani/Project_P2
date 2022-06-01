@@ -69,7 +69,7 @@ spring.datasource.initialization-mode=never
 
 logging.level.org.springframework.context=DEBUG
 ``` 
-- You must also make some adjustments to `AmazonConfig` in utility class
+- You must also make some adjustments to `AmazonConfig` in utility package
 ```java
 @Configuration
 public class AmazonConfig {
@@ -81,5 +81,24 @@ public class AmazonConfig {
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials)).build();
     }
 }
+```
+- You must also changes in the `BucketName` class and change `PROFILE_IMAGE` and insert your s3 bucket name
+```Java
+package com.revature.project_p2.utility;
+
+public enum BucketName {
+    PROFILE_IMAGE("<your bucket name here>");
+
+    private final String bucketName;
+
+    BucketName(String bucketName) {
+        this.bucketName = bucketName;
+    }
+
+    public String getBucketName() {
+        return bucketName;
+    }
+}
+
 ```
 - For best user experience, the dimensions of the user images should not exceed 300px by 300px
