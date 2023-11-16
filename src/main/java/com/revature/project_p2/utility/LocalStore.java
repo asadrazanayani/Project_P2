@@ -35,12 +35,11 @@ public class LocalStore implements IFileStore {
         byte[] array;
         try {
             array = method(pathToFile);
+            return array;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        // Printing the byte array
-        System.out.print(Arrays.toString(array));
 
 
     }

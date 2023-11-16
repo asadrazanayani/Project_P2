@@ -16,7 +16,7 @@ public class PokePalController {
     @Autowired
     PokePalService userService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<PokePal> getAllUsers() {
         return userService.getAllUsers();
     }

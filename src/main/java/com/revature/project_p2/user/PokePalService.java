@@ -1,7 +1,6 @@
 package com.revature.project_p2.user;
 
-import com.revature.project_p2.utility.BucketName;
-import com.revature.project_p2.utility.FileStore;
+import com.revature.project_p2.utility.LocalStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +16,7 @@ public class PokePalService {
     @Autowired
     PokePalRepository userRepository;
     @Autowired
-    FileStore fileStore;
+    LocalStore fileStore;
 
     public PokePal register(PokePal user) {
         return userRepository.save(user);
@@ -53,10 +52,10 @@ public class PokePalService {
         metaData.put("Content-type", file.getContentType());
         metaData.put("Content-Length", String.valueOf(file.getSize()));
         // 5. Store the image in s3 and update database (userProfileImageLink) with s3 image link
-        String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), pokePal.getUser_id());
+        String path = String.format("%s",pokePal.getUser_id());
         String fileName = String.format("%s", file.getOriginalFilename());
         try {
-            fileStore.save(path, fileName, Optional.of(metaData), file.getInputStream());
+            fileStore.save(path, fileName, file.getInputStream());
             pokePal.setUser_img_url(fileName);
             userRepository.save(pokePal);
         } catch (IOException e) {
@@ -67,7 +66,7 @@ public class PokePalService {
 
     public byte[] downloadProfileImage(Long user_id) {
         PokePal pokePal = userRepository.findById(user_id).get();
-        String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), pokePal.getUser_id());
+        String path = String.format("%s", pokePal.getUser_id());
         return fileStore.download(path, pokePal.getUser_img_url());
 
     }
