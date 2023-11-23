@@ -13,14 +13,14 @@ export class PokedexService {
 
   pokePal! : PokePal;
   loginUser! : Login;
-  url : string = "http://localhost:9003/api/v1"
-  
+  url : string = "http://192.168.4.168:9003/api/v1"
+
   constructor(private http:HttpClient) { }
 
   addPokepal(pokePal : PokePal)  {
     return this.http.post<PokePal>(this.url+"/user", pokePal)
   }
-  
+
   getPokePalByEmailPass(loginPokePal : PokePal) {
     return this.http.put<PokePal>(this.url+"/user/login", loginPokePal);
   }
@@ -76,7 +76,7 @@ export class PokedexService {
     return this.http.put<PokePal>(this.url + `/user/${loggedInPokePal.user_id}` , loggedInPokePal)
   }
 
- 
- 
+
+
 
 }

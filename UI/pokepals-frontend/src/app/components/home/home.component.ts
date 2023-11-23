@@ -15,10 +15,10 @@ export class HomeComponent implements OnInit {
   loginPokePal! : PokePal;
   hasUserID : boolean = false;
   fileName : string = ""; // to upload img
-  fileUploadMessage : string = ""; 
+  fileUploadMessage : string = "";
 
   test : string = "";
-  
+
   constructor(private pokedexService : PokedexService, private sessionServices : SessionServicesService) {}
 
   ngOnInit(): void {
@@ -66,10 +66,10 @@ export class HomeComponent implements OnInit {
       this.loginPokePal = pokePal;
       console.log(this.loginPokePal);
       this.sessionServices.postLoggedInUser(this.loginPokePal);
-    }) 
+    })
   }
 
-  onFileSelected(event : any) { 
+  onFileSelected(event : any) {
     const file:File = event.target.files[0];
 
     if (file) {
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
         const formData = new FormData();
         formData.append("file", file);
         // posting via axios
-        axios.post(`http://localhost:9003/api/v1/user/${this.signuppokePal.user_id}/image/upload`, formData, {
+        axios.post(`http://192.168.4.168:9003/api/v1/user/${this.signuppokePal.user_id}/image/upload`, formData, {
           headers : {
             "Content-Types" : "multipart/form-data"
             // for images, content-type will be multipart
@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
             this.hasUserID = !this.hasUserID;
             this.fileUploadMessage = "";
           }, 2000)
-           
+
 
         }).catch(err => {
           console.log("Error");

@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProjectP2Application {
 
 	public static void main(String[] args) {
+		System.out.println(System.getenv("springdoc.api-docs.path"));
+		System.out.println(System.getenv("spring.datasource.url"));
 		SpringApplication.run(ProjectP2Application.class, args);
 	}
 

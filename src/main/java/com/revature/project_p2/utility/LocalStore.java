@@ -9,25 +9,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class LocalStore implements IFileStore {
+public class LocalStore {
 
     @Value("${local.Store.Path}")
-    private String localStorePath;
+    String localStorePath;
 
-    @Override
     public void save(String path, String fileName, InputStream inputStream) {
-        Path pathToFile = Paths.get(localStorePath+"/"+path+"/"+fileName);
         byte[] buffer;
         try {
-            buffer = java.nio.file.Files.readAllBytes(pathToFile);
-            File targetFile = new File("src/test/resources/targetFile.tmp");
-            OutputStream outStream = new FileOutputStream(targetFile);
+            buffer = new byte[inputStream.available()];
+            File file = new File(localStorePath+"/"+path+"/"+fileName);
+            file.getParentFile().mkdirs();
+            OutputStream outStream = new FileOutputStream(file);
             outStream.write(buffer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @Override
+
     public byte[] download(String path, String key) {
         File pathToFile = new File(
                 localStorePath+"/"+path+"/"+key);
